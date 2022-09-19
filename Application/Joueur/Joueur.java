@@ -1,11 +1,14 @@
 package Joueur;
+
+import CasesClasses.Case;
+
 public class Joueur {
     int endurance;
-	Case case;
+    Case caseOccupe;
 	
-	public Joueur(int endurance, Case case) {
+	public Joueur(int endurance, Case caseOccupe) {
 		this.endurance = endurance;
-		this.case = case;
+        this.caseOccupe = caseOccupe;
 	}
     
 }

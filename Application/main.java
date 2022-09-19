@@ -21,33 +21,71 @@ public class main {
 	  jframe.setSize(100, 100);
 	 
 	  jframe.setVisible(true);
+
+
+	  
  
     }
 }
 
 class MKeyListener extends KeyAdapter {
 	
-	int[][] tableau = new int[5][5];
-	 
-	public void keyPressed(KeyEvent e) {
-	    if (e.getKeyCode() == KeyEvent.VK_RIGHT ) {
-	            //Right arrow key code
-	    	System.out.println("Flèche Droite");
-	    } else if (e.getKeyCode() == KeyEvent.VK_LEFT ) {
-	            //Left arrow key code
-	    	System.out.println("Flèche Gauche");
-	    } else if (e.getKeyCode() == KeyEvent.VK_UP ) {
-	            //Up arrow key code
-	    	System.out.println("Flèche Haut");
-	    } else if (e.getKeyCode() == KeyEvent.VK_DOWN ) {
-	            //Down arrow key code
-	    	System.out.println("Flèche Bas");
-	    }
-	    else 
-	    	System.out.println(e.getKeyCode());
+	int taille = 10;
 
-	    
-	    System.out.println(Arrays.deepToString(tableau));
+	int[][] tableau = new int[taille][taille];
+	int x = 0;
+	int y = 0;
+
+
+
+	public void keyPressed(KeyEvent e) {
+
+		tableau[x][y] = 0;
+
+	    if (e.getKeyCode() == KeyEvent.VK_RIGHT )
+		{
+	         //Right arrow key code
+	    	System.out.println("Fleche Droite");
+			if(y < taille-1)
+			{
+				y++;
+			}
+	    } else if (e.getKeyCode() == KeyEvent.VK_LEFT )
+		{
+	         //Left arrow key code
+	    	System.out.println("Fleche Gauche");
+			if(y > 0)
+			{
+				y--;
+			}
+	    } else if (e.getKeyCode() == KeyEvent.VK_DOWN )
+		{
+	         //Up arrow key code
+	    	System.out.println("Fleche Haut");
+			if(x < taille-1)
+			{
+				x++;
+			}
+	    } else if (e.getKeyCode() == KeyEvent.VK_UP)
+		{
+	        //Down arrow key code
+	    	System.out.println("Fleche Bas");
+			if(x > 0)
+			{
+				x--;
+			}
+	    }
+
+		tableau[x][y] = 1;
+
+		for(int i = 0; i < taille; i++)
+		{
+			for(int y = 0; y < taille; y++)
+			{
+				System.out.print(tableau[i][y]);
+			}
+			System.out.println();
+		}
 	}
 }
 

@@ -1,0 +1,34 @@
+
+Principe de Jeu :
+
+Carte 2d
+
+Grille : obstacles, bonus
+Joueur : case 0 (0,0) / Endurance :  ?
+Maison : case X (x,y)
+
+Déplacement : 
+si case vide -> -1 Endurance
+si obstacle -> -10 Endurance et retourne à la case précedente
+si bonus -> +10 Endurance
+
+Victoire : rejoindre la maison
+Défaite : Ne plus avoir d'Endurance
+
+Case : 
+vide -> rien
+obstacle -> rien
+bonus -> retire le bonus et case devient vide
+
+-----------------------------------------------------------
+Fonctionnalités :
+
+- Alerte sur une case déja passée par le joueur
+- Retour en arrière (max : 6)
+- En cas de Victoire : afficher la distance parcourue, l'energie restante, l'energie gagnée, l'energie perdue,
+			le chemin parcourue, le meilleur chemin (en terme d'energie et de distance)
+- Quitter et restaurer une partie en cours
+- Voir l'historique des parties jouées et visualiser le chemin emprunté (sur partie gagner) 
+   disponible avec plusieurs vitesse d'animation
+- Génerer la carte aléatoirement et s'assurer de la faisabilité de la partie (avec et sans tenir compte de l'énergie)
+- Algorithme de résolution de partie

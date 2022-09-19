@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 
 public class MKeyListener extends KeyAdapter {
 	
-	int taille = 10;
+	int taille = 3;
 
 	int[][] tableau = new int[taille][taille];
 	int x = 0;
@@ -35,7 +35,7 @@ public class MKeyListener extends KeyAdapter {
 	    } else if (e.getKeyCode() == KeyEvent.VK_DOWN )
 		{
 	         //Up arrow key code
-	    	System.out.println("Fleche Haut");
+	    	System.out.println("Fleche Bas");
 			if(x < taille-1)
 			{
 				x++;
@@ -43,7 +43,7 @@ public class MKeyListener extends KeyAdapter {
 	    } else if (e.getKeyCode() == KeyEvent.VK_UP)
 		{
 	        //Down arrow key code
-	    	System.out.println("Fleche Bas");
+	    	System.out.println("Fleche Haut");
 			if(x > 0)
 			{
 				x--;

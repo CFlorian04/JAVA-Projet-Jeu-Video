@@ -12,8 +12,9 @@ import javafx.stage.Stage;
 
 public class main extends Application {
 
-	int tailleGrille = 5;
-	Case[][] Casegrille = new Case[10][10];
+	int tailleGrille = 10;
+	//Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
+	int[][] Chiffregrille = new int[tailleGrille][tailleGrille]; //Test avec la console
 
 	public static void main(String[] args) {
         launch(args);
@@ -60,24 +61,52 @@ public class main extends Application {
 		StackPane root = new StackPane();
 		Rectangle[][] Rectgrille = new Rectangle[taille][taille];
 
-		Obstacle rocher = new Obstacle(0);
+		//Obstacle rocher = new Obstacle(0);
+		//Casegrille[0][0].setCategorie(rocher);
 
-		Casegrille[0][0].setCategorie(rocher);
-		System.out.println(Casegrille[0][0]);
+		//System.out.println(Casegrille[0][0]);
+
+		System.out.print("\033[H\033[2J");
 
 		for(int i = 0; i< taille; i++)
 		{
 			for(int y = 0; y< taille; y++)
 			{
-				System.out.println("i : " + i + " / y : " + y);
 
 				Rectgrille[i][y] = createRectangle(50*i, 50*y, 50, 50);
 				addShapeInLayout(Rectgrille[i][y],root);
-
+				Chiffregrille[i][y] = 0;
+				/*
 				Casegrille[i][y].setPosX(i);
 				Casegrille[i][y].setPosY(y);
 				Casegrille[i][y].setCategorie(rocher);
+				*/
+
+				int rand = (int) (Math.random()*100);
+			
+				if(rand > 70) //30% -> Obstacle
+				{
+					Chiffregrille[i][y] = 1;
+				}
+				else if(rand < 5) //5% -> Bonus
+				{
+					Chiffregrille[i][y] = 2;
+				}
 			}
+			Chiffregrille[0][0] = 5;
+			Chiffregrille[tailleGrille-1][tailleGrille-1] = 9;
+		}
+
+		
+
+		//Afficher la grille dans la console
+		for(int i = 0; i< taille; i++)
+		{
+			for(int y = 0; y< taille; y++)
+			{
+				System.out.print(Chiffregrille[i][y]);
+			}
+			System.out.println();
 		}
 
 		return root;
@@ -90,15 +119,12 @@ public class main extends Application {
 
    public Rectangle createRectangle(int posX, int posY, int hauteur, int largeur)
    {
-		Rectangle rect = new Rectangle();
-		rect.setX(posX);
-		rect.setY(posY);
-		rect.setWidth(largeur);
-		rect.setHeight(hauteur);
+		Rectangle rect = new Rectangle(posX,posY,largeur,hauteur);
 		//rect.setFill(Color.GREEN);
 		//rect.setStroke(Color.BLACK);
 		return rect;
    }
+   
 
 }
 

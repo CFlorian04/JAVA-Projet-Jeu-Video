@@ -1,9 +1,10 @@
 
 import CasesClasses.*;
+import MKeyListener.MKeyListener;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.*;
@@ -14,8 +15,9 @@ public class main extends Application {
 
 	int tailleGrille = 10;
 	//Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
-	int[][] Chiffregrille = new int[tailleGrille][tailleGrille]; //Test avec la console
+	int[][] chiffreGrille = new int[tailleGrille][tailleGrille]; //Test avec la console
 
+	
 	public static void main(String[] args) {
         launch(args);
     }
@@ -23,7 +25,9 @@ public class main extends Application {
    @Override
    public void start(Stage primaryStage) throws Exception {
 
-		Button btn = new Button();
+		System.out.print("\033[H\033[2J");
+
+		/*Button btn = new Button();
 		btn.setText("Test");
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			
@@ -31,20 +35,13 @@ public class main extends Application {
 			{
 				System.out.println("Hello World");
 			}
-		});
+		});*/
 
 		StackPane root = setGrille(tailleGrille);
 		Scene scene = new Scene(root);
 
 		setScene(primaryStage, scene, "Nom du Jeu", 700, 700);
 
-	   	/* 
-	   	primaryStage.setTitle("Nom du Jeu");
-		primaryStage.setScene(scene);
-		primaryStage.setHeight(700);
-		primaryStage.setWidth(700);
-		primaryStage.show();
-		*/
    }
 
    public void setScene(Stage Stage ,Scene scene, String title, int hauteur, int largeur)
@@ -66,8 +63,6 @@ public class main extends Application {
 
 		//System.out.println(Casegrille[0][0]);
 
-		System.out.print("\033[H\033[2J");
-
 		for(int i = 0; i< taille; i++)
 		{
 			for(int y = 0; y< taille; y++)
@@ -75,7 +70,7 @@ public class main extends Application {
 
 				Rectgrille[i][y] = createRectangle(50*i, 50*y, 50, 50);
 				addShapeInLayout(Rectgrille[i][y],root);
-				Chiffregrille[i][y] = 0;
+				chiffreGrille[i][y] = 0;
 				/*
 				Casegrille[i][y].setPosX(i);
 				Casegrille[i][y].setPosY(y);
@@ -86,15 +81,15 @@ public class main extends Application {
 			
 				if(rand > 70) //30% -> Obstacle
 				{
-					Chiffregrille[i][y] = 1;
+					chiffreGrille[i][y] = 1;
 				}
-				else if(rand < 5) //5% -> Bonus
+				else if(rand < 2) //2% -> Bonus
 				{
-					Chiffregrille[i][y] = 2;
+					chiffreGrille[i][y] = 2;
 				}
 			}
-			Chiffregrille[0][0] = 5;
-			Chiffregrille[tailleGrille-1][tailleGrille-1] = 9;
+			chiffreGrille[0][0] = 5;
+			chiffreGrille[tailleGrille-1][tailleGrille-1] = 9;
 		}
 
 		
@@ -104,7 +99,7 @@ public class main extends Application {
 		{
 			for(int y = 0; y< taille; y++)
 			{
-				System.out.print(Chiffregrille[i][y]);
+				System.out.print(chiffreGrille[i][y]);
 			}
 			System.out.println();
 		}

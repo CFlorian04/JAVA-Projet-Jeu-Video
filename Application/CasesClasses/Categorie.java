@@ -4,9 +4,10 @@ package CasesClasses;
 public class Categorie
 {
     int modifEndurance;
+    String imageSrc;
 
-    public Categorie(int modifEndurance) {
-        this.modifEndurance = modifEndurance;
+    public Categorie() {
+        this.modifEndurance = 0;
     }
 
     public int getModifEndurance() {
@@ -15,6 +16,16 @@ public class Categorie
 
     public void setModifEndurance(int modifEndurance) {
         this.modifEndurance = modifEndurance;
+    }
+
+    public String getImageSrc()
+    {
+        return imageSrc;
+    }
+
+    public void setImageSrc(String imageSrc)
+    {
+        this.imageSrc = imageSrc;
     }
 
     

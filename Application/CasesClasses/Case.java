@@ -25,5 +25,22 @@ public class Case {
     public int getPosY() {
         return posY;
     }
+
+    public Categorie getCategorie()
+    {
+        return categorie;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
     
 }

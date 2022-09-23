@@ -1,4 +1,5 @@
 import CasesClasses.*;
+import Joueur.Joueur;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -21,9 +22,7 @@ public class main extends Application {
 
 	int tailleGrille = 10;
 	Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
-	char[][] consoleGrille = new char[tailleGrille][tailleGrille]; //Test avec la console
 
-	
 	public static void main(String[] args) {
         launch(args);
     }
@@ -53,6 +52,7 @@ public class main extends Application {
 		//Ajoute le layout sur la scene
 		Scene scene = new Scene(layoutGrille);
 
+
 		//Applique la scene sur l'interface graphique
 		setScene(primaryStage, scene, "Nom du Jeu", tailleGrille*30 + 200,  tailleGrille*30 + 200);
 
@@ -60,7 +60,6 @@ public class main extends Application {
 			if(event.getCode() == KeyCode.LEFT)
 			{
 				System.out.println("Fleche Gauche");
-
 			}
 			else if(event.getCode() == KeyCode.RIGHT)
 			{
@@ -95,10 +94,6 @@ public class main extends Application {
    //Fonction qui créer la grille (console, case et graphique)
    public GridPane setGrille(int taille)
    {
-		//Integration des images
-		//Image image = new Image("myImage");
-		//ImagePattern imagePattern = new ImagePattern(image);
-		//Rectgrille[i][y].setFill(imagePattern);
 
 		GridPane root = new GridPane();
 		Rectangle[][] Rectgrille = new Rectangle[taille][taille];
@@ -115,7 +110,6 @@ public class main extends Application {
 				Rectgrille[i][y] = createRectangle(50*i, 50*y, 25,25);
 				Rectgrille[i][y].setFill(Color.rgb(100, 255,100));
 				root.add(Rectgrille[i][y],i,y);
-				consoleGrille[i][y] = ' ';
 				/*
 				Casegrille[i][y].setPosX(i);
 				Casegrille[i][y].setPosY(y);
@@ -128,33 +122,18 @@ public class main extends Application {
 				{
 					Rectgrille[i][y].setFill(Color.rgb(194, 194,194));
 					//Casegrille[i][y].setCategorie(obstacle);
-					consoleGrille[i][y] = 'X';
 				}
 				else if(rand < 2) //2% -> Bonus
 				{
 					Rectgrille[i][y].setFill(Color.rgb(243, 243,43));
 					//Casegrille[i][y].setCategorie(bonus);
-					consoleGrille[i][y] = 'B';
 				}
 			}
 		}
+
 		//Applique le personnage ('0') et la maison ('M') pour la console
 		Rectgrille[0][0].setFill(Color.rgb(25, 55,220));
-		consoleGrille[0][0] = 'O';
 		Rectgrille[tailleGrille-1][tailleGrille-1].setFill(Color.rgb(220, 55,25));
-		consoleGrille[tailleGrille-1][tailleGrille-1] = 'M';
-
-		
-
-		//Afficher la grille dans la console
-		for(int i = 0; i< taille; i++)
-		{
-			for(int y = 0; y< taille; y++)
-			{
-				System.out.print(consoleGrille[i][y]);
-			}
-			System.out.println();
-		}
 
 		//Renvoi le layout de la grille
 		return root;
@@ -176,8 +155,3 @@ public class main extends Application {
 		return null;
    }
 }
-
-
-
-
-

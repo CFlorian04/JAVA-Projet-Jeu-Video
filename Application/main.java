@@ -13,7 +13,8 @@ import javafx.stage.Stage;
 
 public class main extends Application {
 
-	int tailleGrille = 10;
+	int tailleGrille = new Jeu().getTailleGrille();
+
 	int[][] consoleGrille = new int[tailleGrille][tailleGrille];
 	Jeu Jeu;
 	public static void main(String[] args) {
@@ -42,7 +43,7 @@ public class main extends Application {
 		layoutGrille.setHgap(2);
 		layoutGrille.setVgap(2);
 		//Affecte la grille dans le jeu
-		Jeu = new Jeu(tailleGrille,consoleGrille);
+		Jeu = new Jeu(consoleGrille);
 
 
 		//Ajoute le layout sur la scene
@@ -51,13 +52,86 @@ public class main extends Application {
 		//Applique la scene sur l'interface graphique
 		setScene(primaryStage, scene, "Nom du Jeu", tailleGrille*30 + 200,  tailleGrille*30 + 200);
 
+
+		
 		scene.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
 
 			int playerX = 0;
 			int playerY = 0;
-			int endurance = 0;
+			int endurance = 0 ;
 			boolean move = false;
-			/* Print du tableau en console
+			
+			if(event.getCode() == KeyCode.LEFT)
+			{	
+				if(playerX > 0)
+				{
+					if(consoleGrille[playerX-1][playerY] != 1)
+					{
+						consoleGrille[playerX][playerY] = 0;
+						consoleGrille[playerX-1][playerY] = 3;
+						endurance = Jeu.changerPosJoueur(playerX-1,playerY);
+						move = true;
+						System.out.print("Done ->");
+					}
+				}
+
+				System.out.println("Fleche Gauche");
+			}
+			else if(event.getCode() == KeyCode.RIGHT)
+			{
+				if(playerX < tailleGrille)
+				{
+					if(consoleGrille[playerX+1][playerY] != 1)
+					{
+						consoleGrille[playerX][playerY] = 0;
+						consoleGrille[playerX+1][playerY] = 3;
+						endurance = Jeu.changerPosJoueur(playerX+1,playerY);
+						move = true;
+						System.out.print("Done ->");
+					}
+				}
+				System.out.println("Fleche Droite");
+			}
+			else if(event.getCode() == KeyCode.UP)
+			{
+				if(playerY > 0)
+				{
+					if(consoleGrille[playerX][playerY-1] != 1)
+					{
+						consoleGrille[playerX][playerY] = 0;
+						consoleGrille[playerX][playerY-1] = 3;
+						endurance = Jeu.changerPosJoueur(playerX,playerY-1);
+						move = true;
+						System.out.print("Done ->");
+					}
+				}
+				System.out.println("Fleche Haut");
+			}
+			else if(event.getCode() == KeyCode.DOWN)
+			{
+				if(playerY < tailleGrille)
+				{
+					if(consoleGrille[playerX][playerY+1] != 1)
+					{
+						consoleGrille[playerX][playerY] = 0;
+						consoleGrille[playerX][playerY+1] = 3;
+						endurance = Jeu.changerPosJoueur(playerX,playerY+1);
+						move = true;
+						System.out.print("Done ->");
+					}
+				}
+				System.out.println("Fleche Bas");
+			}
+
+			if(move)
+			{
+				//Mettre à jour la grille
+				//Applique la scene sur l'interface graphique
+				setScene(primaryStage, scene, "Nom du Jeu", tailleGrille*30 + 200,  tailleGrille*30 + 200);
+			}
+
+			/*  Print du tableau en console */
+			System.out.println("Endurance : " + endurance);
 			for(int i = 0; i< tailleGrille; i++)
 			{
 				for(int y = 0; y< tailleGrille; y++)
@@ -71,58 +145,6 @@ public class main extends Application {
 					System.out.print(consoleGrille[y][i]);
 				}
 				System.out.println();
-			}
-			*/
-			if(event.getCode() == KeyCode.LEFT)
-			{
-				if(consoleGrille[playerX-1][playerY] != 1)
-				{
-					consoleGrille[playerX][playerY] = 0;
-					consoleGrille[playerX-1][playerY] = 3;
-					endurance = Jeu.changerPosJoueur(-1,0);
-					move = true;
-				}
-				System.out.println("Fleche Gauche");
-			}
-			else if(event.getCode() == KeyCode.RIGHT)
-			{
-				if(consoleGrille[playerX+1][playerY] != 1)
-				{
-					consoleGrille[playerX][playerY] = 0;
-					consoleGrille[playerX+1][playerY] = 3;
-					endurance = Jeu.changerPosJoueur(1,0);
-					move = true;
-				}
-				System.out.println("Fleche Droite");
-			}
-			else if(event.getCode() == KeyCode.UP)
-			{
-				if(consoleGrille[playerX][playerY-1] != 1)
-				{
-					consoleGrille[playerX][playerY] = 0;
-					consoleGrille[playerX][playerY-1] = 3;
-					endurance = Jeu.changerPosJoueur(0,-1);
-					move = true;
-				}
-				System.out.println("Fleche Haut");
-			}
-			else if(event.getCode() == KeyCode.DOWN)
-			{
-				if(consoleGrille[playerX][playerY+1] != 1)
-				{
-					consoleGrille[playerX][playerY] = 0;
-					consoleGrille[playerX][playerY+1] = 3;
-					endurance = Jeu.changerPosJoueur(0,1);
-					move = true;
-				}
-				System.out.println("Fleche Bas");
-			}
-
-			if(move)
-			{
-				//Mettre à jour la grille
-				//Applique la scene sur l'interface graphique
-				setScene(primaryStage, scene, "Nom du Jeu", tailleGrille*30 + 200,  tailleGrille*30 + 200);
 			}
 		});
 

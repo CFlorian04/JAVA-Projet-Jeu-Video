@@ -5,27 +5,31 @@ import Joueur.Joueur;
 
 public class Jeu {
 
-    int tailleGrille = 0;
-    Case[][] Casegrille;
+    int tailleGrille = 10;
     Joueur player;
     int[][] consoleGrille;
+    Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
 
     Obstacle obstacle = new Obstacle(0);
 	Bonus bonus = new Bonus(0);
 
-    public Jeu(int tailleGrille, int[][] consoleGrille) {
-
-        this.tailleGrille = tailleGrille;
-        this.consoleGrille = consoleGrille;
-
-        Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
+    public Jeu() {
         Joueur player = new Joueur(15, Casegrille[0][0]);
-
-
-
-        //initialiseCasegrille();
     }
 
+    public Jeu(int[][] consoleGrille) {
+
+        this.consoleGrille = consoleGrille;
+        
+        Joueur player = new Joueur(15, Casegrille[0][0]);
+
+        initialiseCasegrille();
+    }
+
+    public int getTailleGrille()
+    {
+        return tailleGrille;
+    }
 
     public Case getCase(int x, int y)
     {	
@@ -74,18 +78,13 @@ public class Jeu {
 
    public int changerPosJoueur(int x, int y)
    {
-        System.out.println(player.getEndurance());
         int endurance = 0;
 
-        /*if(x != 0)
+        if(x != 0)
         {
-            endurance = player.MarcheX(x);
+            endurance = player.Marche(x,y);
         }
             
-        if(y != 0)
-        {
-            endurance = player.MarcheY(y);
-        }*/
         return endurance;
    }
 }

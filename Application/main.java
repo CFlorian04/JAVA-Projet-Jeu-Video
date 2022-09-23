@@ -53,8 +53,8 @@ public class main extends Application {
 
 		scene.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
 
-			int playerX;
-			int playerY;
+			int playerX = 0;
+			int playerY = 0;
 			for(int i = 0; i< tailleGrille; i++)
 			{
 				for(int y = 0; y< tailleGrille; y++)
@@ -62,24 +62,44 @@ public class main extends Application {
 					if(consoleGrille[i][y] == 3)
 					{
 						//Applique les coordonnées
+						playerX = i;
+						playerY = y;
 					}
+					System.out.print(consoleGrille[y][i]);
 				}
+				System.out.println();
 			}
 		
 			if(event.getCode() == KeyCode.LEFT)
 			{
+				if(consoleGrille[playerX-1][playerY] != 1)
+				{
+					Jeu.changerPosJoueur(-1,0);
+				}
 				System.out.println("Fleche Gauche");
 			}
 			else if(event.getCode() == KeyCode.RIGHT)
 			{
+				if(consoleGrille[playerX+1][playerY] != 1)
+				{
+					Jeu.changerPosJoueur(1,0);
+				}
 				System.out.println("Fleche Droite");
 			}
 			else if(event.getCode() == KeyCode.UP)
 			{
+				if(consoleGrille[playerX][playerY-1] != 1)
+				{
+					Jeu.changerPosJoueur(0,-1);
+				}
 				System.out.println("Fleche Haut");
 			}
 			else if(event.getCode() == KeyCode.DOWN)
 			{
+				if(consoleGrille[playerX][playerY+1] != 1)
+				{
+					Jeu.changerPosJoueur(0,1);
+				}
 				System.out.println("Fleche Bas");
 			}
 		});

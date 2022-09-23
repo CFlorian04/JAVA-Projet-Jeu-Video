@@ -75,6 +75,7 @@ public class Jeu {
 
    public void changerPosJoueur(int x, int y)
    {
-    player.Deplacer(x, y);
+        player.MarcheX(x);
+        player.MarcheY(y);
    }
 }

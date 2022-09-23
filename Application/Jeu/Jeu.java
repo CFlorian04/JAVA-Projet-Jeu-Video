@@ -21,7 +21,7 @@ public class Jeu {
         Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
         Joueur player = new Joueur(15, Casegrille[0][0]);
 
-        System.out.println(consoleGrille);
+
 
         //initialiseCasegrille();
     }
@@ -65,23 +65,27 @@ public class Jeu {
         this.consoleGrille = consoleGrille;
    }
 
-
-   public boolean canGo(Case départ, Case arrivé, int[][] Grille) {
+   /*public boolean canGo(Case départ, Case arrivé, int[][] Grille) {
     int x, y;
     if(arrivé.getPosX() == )
     return false;
 
-   }
+   }*/
 
    public int changerPosJoueur(int x, int y)
    {
+        System.out.println(player.getEndurance());
         int endurance = 0;
-        if(x != 0)
+
+        /*if(x != 0)
+        {
             endurance = player.MarcheX(x);
+        }
             
         if(y != 0)
+        {
             endurance = player.MarcheY(y);
-
+        }*/
         return endurance;
    }
 }

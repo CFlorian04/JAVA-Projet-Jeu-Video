@@ -1,22 +1,21 @@
-
 import CasesClasses.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 
-public class main extends Application implements KeyListener{
+public class main extends Application {
 
 	int tailleGrille = 10;
 	//Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
@@ -55,6 +54,25 @@ public class main extends Application implements KeyListener{
 		//Applique la scene sur l'interface graphique
 		setScene(primaryStage, scene, "Nom du Jeu", tailleGrille*30 + 100,  tailleGrille*30 + 100);
 
+		scene.addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
+			if(event.getCode() == KeyCode.LEFT)
+			{
+				System.out.println("Fleche Gauche");
+			}
+			else if(event.getCode() == KeyCode.RIGHT)
+			{
+				System.out.println("Fleche Droite");
+			}
+			else if(event.getCode() == KeyCode.UP)
+			{
+				System.out.println("Fleche Haut");
+			}
+			else if(event.getCode() == KeyCode.DOWN)
+			{
+				System.out.println("Fleche Bas");
+			}
+		});
+
    }
 
    //Fonction qui applique la scene sur l'interface graphique
@@ -76,8 +94,6 @@ public class main extends Application implements KeyListener{
 		//Obstacle obstacle = new Obstacle(0);
 		//Bonus bonus = new Bonus(0);
 		
-
-
 		//Créer un rectangle et y associe un type de case pour chaque cases
 		for(int i = 0; i< taille; i++)
 		{
@@ -140,78 +156,6 @@ public class main extends Application implements KeyListener{
 		//rect.setStroke(Color.BLACK);
 		return rect;
    }
-   
-
-   /**
-	* Utilisation des touches
-	* @param e
-    */
-   public void keyPressed(KeyEvent e) {
-
-		tableau[x][y] = 0;
-
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT )
-		{
-			//Right arrow key code
-			System.out.println("Fleche Droite");
-			if(y < taille-1)
-			{
-				y++;
-			}
-		} else if (e.getKeyCode() == KeyEvent.VK_LEFT )
-		{
-			//Left arrow key code
-			System.out.println("Fleche Gauche");
-			if(y > 0)
-			{
-				y--;
-			}
-		} else if (e.getKeyCode() == KeyEvent.VK_DOWN )
-		{
-			//Up arrow key code
-			System.out.println("Fleche Bas");
-			if(x < taille-1)
-			{
-				x++;
-			}
-		} else if (e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			//Down arrow key code
-			System.out.println("Fleche Haut");
-			if(x > 0)
-			{
-				x--;
-			}
-		}
-
-		tableau[x][y] = 1;
-
-		for(int i = 0; i < taille; i++)
-		{
-			for(int y = 0; y < taille; y++)
-			{
-				System.out.print(tableau[i][y]);
-			}
-			System.out.println();
-		}
-	}
-
-
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
 
 

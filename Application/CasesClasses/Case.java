@@ -3,9 +3,9 @@ package CasesClasses;
 
 public class Case {
 
-    int posX;
-    int posY;
-    Categorie categorie;
+    private int posX;
+    private int posY;
+    private Categorie categorie;
 
     public Case(int posX, int posY) {
         this.posX = posX;

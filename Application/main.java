@@ -12,8 +12,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class main extends Application {
+
+public class main extends Application implements KeyListener{
 
 	int tailleGrille = 10;
 	//Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
@@ -138,6 +141,76 @@ public class main extends Application {
 		return rect;
    }
    
+
+   /**
+	* Utilisation des touches
+	* @param e
+    */
+   public void keyPressed(KeyEvent e) {
+
+		tableau[x][y] = 0;
+
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT )
+		{
+			//Right arrow key code
+			System.out.println("Fleche Droite");
+			if(y < taille-1)
+			{
+				y++;
+			}
+		} else if (e.getKeyCode() == KeyEvent.VK_LEFT )
+		{
+			//Left arrow key code
+			System.out.println("Fleche Gauche");
+			if(y > 0)
+			{
+				y--;
+			}
+		} else if (e.getKeyCode() == KeyEvent.VK_DOWN )
+		{
+			//Up arrow key code
+			System.out.println("Fleche Bas");
+			if(x < taille-1)
+			{
+				x++;
+			}
+		} else if (e.getKeyCode() == KeyEvent.VK_UP)
+		{
+			//Down arrow key code
+			System.out.println("Fleche Haut");
+			if(x > 0)
+			{
+				x--;
+			}
+		}
+
+		tableau[x][y] = 1;
+
+		for(int i = 0; i < taille; i++)
+		{
+			for(int y = 0; y < taille; y++)
+			{
+				System.out.print(tableau[i][y]);
+			}
+			System.out.println();
+		}
+	}
+
+
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
 

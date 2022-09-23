@@ -73,9 +73,15 @@ public class Jeu {
 
    }
 
-   public void changerPosJoueur(int x, int y)
+   public int changerPosJoueur(int x, int y)
    {
-        player.MarcheX(x);
-        player.MarcheY(y);
+        int endurance = 0;
+        if(x != 0)
+            endurance = player.MarcheX(x);
+            
+        if(y != 0)
+            endurance = player.MarcheY(y);
+
+        return endurance;
    }
 }

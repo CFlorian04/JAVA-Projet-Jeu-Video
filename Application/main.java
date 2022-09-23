@@ -15,7 +15,7 @@ public class main extends Application {
 
 	int tailleGrille = 10;
 	//Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
-	int[][] chiffreGrille = new int[tailleGrille][tailleGrille]; //Test avec la console
+	char[][] consoleGrille = new char[tailleGrille][tailleGrille]; //Test avec la console
 
 	
 	public static void main(String[] args) {
@@ -70,7 +70,7 @@ public class main extends Application {
 
 				Rectgrille[i][y] = createRectangle(50*i, 50*y, 50, 50);
 				addShapeInLayout(Rectgrille[i][y],root);
-				chiffreGrille[i][y] = 0;
+				consoleGrille[i][y] = ' ';
 				/*
 				Casegrille[i][y].setPosX(i);
 				Casegrille[i][y].setPosY(y);
@@ -81,15 +81,15 @@ public class main extends Application {
 			
 				if(rand > 70) //30% -> Obstacle
 				{
-					chiffreGrille[i][y] = 1;
+					consoleGrille[i][y] = 'X';
 				}
 				else if(rand < 2) //2% -> Bonus
 				{
-					chiffreGrille[i][y] = 2;
+					consoleGrille[i][y] = 'B';
 				}
 			}
-			chiffreGrille[0][0] = 5;
-			chiffreGrille[tailleGrille-1][tailleGrille-1] = 9;
+			consoleGrille[0][0] = 'O';
+			consoleGrille[tailleGrille-1][tailleGrille-1] = 'M';
 		}
 
 		
@@ -99,7 +99,7 @@ public class main extends Application {
 		{
 			for(int y = 0; y< taille; y++)
 			{
-				System.out.print(chiffreGrille[i][y]);
+				System.out.print(consoleGrille[i][y]);
 			}
 			System.out.println();
 		}

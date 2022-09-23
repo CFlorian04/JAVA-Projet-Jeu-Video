@@ -8,13 +8,14 @@ import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 
 
 public class main extends Application {
 
-	int tailleGrille = 20;
+	int tailleGrille = 10;
 	//Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
 	char[][] consoleGrille = new char[tailleGrille][tailleGrille]; //Test avec la console
 
@@ -49,7 +50,7 @@ public class main extends Application {
 		Scene scene = new Scene(layoutGrille);
 
 		//Applique la scene sur l'interface graphique
-		setScene(primaryStage, scene, "Nom du Jeu", 700, 700);
+		setScene(primaryStage, scene, "Nom du Jeu", tailleGrille*30 + 100,  tailleGrille*30 + 100);
 
    }
 
@@ -69,8 +70,9 @@ public class main extends Application {
 		GridPane root = new GridPane();
 		Rectangle[][] Rectgrille = new Rectangle[taille][taille];
 
-		//Obstacle rocher = new Obstacle(0);
-		//Casegrille[0][0].setCategorie(rocher);
+		//Obstacle obstacle = new Obstacle(0);
+		//Bonus bonus = new Bonus(0);
+		
 
 
 		//Créer un rectangle et y associe un type de case pour chaque cases
@@ -80,6 +82,7 @@ public class main extends Application {
 			{
 
 				Rectgrille[i][y] = createRectangle(50*i, 50*y, 25,25);
+				Rectgrille[i][y].setFill(Color.rgb(100, 255,100));
 				root.add(Rectgrille[i][y],i,y);
 				consoleGrille[i][y] = ' ';
 				/*
@@ -92,16 +95,22 @@ public class main extends Application {
 				int rand = (int) (Math.random()*100);
 				if(rand > 70) //30% -> Obstacle
 				{
+					Rectgrille[i][y].setFill(Color.rgb(194, 194,194));
+					//Casegrille[i][y].setCategorie(obstacle);
 					consoleGrille[i][y] = 'X';
 				}
 				else if(rand < 2) //2% -> Bonus
 				{
+					Rectgrille[i][y].setFill(Color.rgb(243, 243,43));
+					//Casegrille[i][y].setCategorie(bonus);
 					consoleGrille[i][y] = 'B';
 				}
 			}
 		}
 		//Applique le personnage ('0') et la maison ('M') pour la console
+		Rectgrille[0][0].setFill(Color.rgb(25, 55,220));
 		consoleGrille[0][0] = 'O';
+		Rectgrille[tailleGrille-1][tailleGrille-1].setFill(Color.rgb(220, 55,25));
 		consoleGrille[tailleGrille-1][tailleGrille-1] = 'M';
 
 		

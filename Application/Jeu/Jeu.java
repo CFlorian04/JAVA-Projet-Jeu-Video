@@ -107,7 +107,6 @@ public class Jeu {
             }
         }
         return false;
-
    }
 
    public Case[] getVoisins (Case c) {

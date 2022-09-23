@@ -72,4 +72,9 @@ public class Jeu {
     return false;
 
    }
+
+   public void changerPosJoueur(int x, int y)
+   {
+    player.Deplacer(x, y);
+   }
 }

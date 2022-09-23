@@ -1,5 +1,4 @@
-import CasesClasses.*;
-import Joueur.Joueur;
+import Jeu.Jeu;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -15,8 +14,8 @@ import javafx.stage.Stage;
 public class main extends Application {
 
 	int tailleGrille = 10;
-	Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
-
+	int[][] consoleGrille = new int[tailleGrille][tailleGrille];
+	Jeu Jeu;
 	public static void main(String[] args) {
         launch(args);
     }
@@ -37,15 +36,14 @@ public class main extends Application {
 			}
 		});*/
 
-		Joueur player = new Joueur(15, Casegrille[0][0]);
-
-		
-
 		//Ajoute la grille graphique sur le layout
-		GridPane layoutGrille = setGrille(tailleGrille);
+		GridPane layoutGrille = setGrille();
 		layoutGrille.setPadding(new Insets(20));
 		layoutGrille.setHgap(2);
 		layoutGrille.setVgap(2);
+		//Affeecte la grille dans le jeu
+		Jeu = new Jeu(tailleGrille,consoleGrille);
+
 
 		//Ajoute le layout sur la scene
 		Scene scene = new Scene(layoutGrille);
@@ -53,29 +51,31 @@ public class main extends Application {
 		//Applique la scene sur l'interface graphique
 		setScene(primaryStage, scene, "Nom du Jeu", tailleGrille*30 + 200,  tailleGrille*30 + 200);
 
-		scene.addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
-			int posX = 0/*player.getCaseOccupe().getPosX()*/;
-			int posY = 0/*player.getCaseOccupe().getPosY()*/;
+		scene.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
+
+			for(int[] element : consoleGrille)
+			{
+				for(int value : element)
+				{
+					
+				}
+			}
+		
 			if(event.getCode() == KeyCode.LEFT)
 			{
 				System.out.println("Fleche Gauche");
-				System.out.println(Casegrille[posX-1][posY].getCategorie());
-				player.Deplacer(posX-1,posY);
 			}
 			else if(event.getCode() == KeyCode.RIGHT)
 			{
 				System.out.println("Fleche Droite");
-				player.Deplacer(posX+1,posY);
 			}
 			else if(event.getCode() == KeyCode.UP)
 			{
 				System.out.println("Fleche Haut");
-				player.Deplacer(posX,posY-1);
 			}
 			else if(event.getCode() == KeyCode.DOWN)
 			{
 				System.out.println("Fleche Bas");
-				player.Deplacer(posX,posY+1);
 			}
 		});
 
@@ -96,45 +96,43 @@ public class main extends Application {
    }
 
    //Fonction qui créer la grille (console, case et graphique)
-   public GridPane setGrille(int taille)
+   public GridPane setGrille()
    {
-		initialiseCasegrille();
 
 		GridPane root = new GridPane();
-		Rectangle[][] Rectgrille = new Rectangle[taille][taille];
+		Rectangle[][] Rectgrille = new Rectangle[tailleGrille][tailleGrille];
 
-		Obstacle obstacle = new Obstacle(0);
-		Bonus bonus = new Bonus(0);
 		
 		//Créer un rectangle et y associe un type de case pour chaque cases
-		for(int i = 0; i< taille; i++)
+		for(int i = 0; i< tailleGrille; i++)
 		{
-			for(int y = 0; y< taille; y++)
+			for(int y = 0; y< tailleGrille; y++)
 			{
 
 				Rectgrille[i][y] = createRectangle(50*i, 50*y, 25,25);
 				Rectgrille[i][y].setFill(Color.rgb(100, 255,100));
 				root.add(Rectgrille[i][y],i,y);
 
-
 				//Probabilité de changer une case vide par un obstacle/bonus
 				int rand = (int) (Math.random()*100);
 				if(rand > 70) //30% -> Obstacle
 				{
 					Rectgrille[i][y].setFill(Color.rgb(194, 194,194));
-					Casegrille[i][y].setCategorie(obstacle);
+					consoleGrille[i][y] = 1;
 				}
 				else if(rand < 2) //2% -> Bonus
 				{
 					Rectgrille[i][y].setFill(Color.rgb(243, 243,43));
-					Casegrille[i][y].setCategorie(bonus);
+					consoleGrille[i][y] = 2;
 				}
 			}
 		}
 
 		//Applique le personnage ('0') et la maison ('M') pour la console
 		Rectgrille[0][0].setFill(Color.rgb(25, 55,220));
+		consoleGrille[0][0] = 3;
 		Rectgrille[tailleGrille-1][tailleGrille-1].setFill(Color.rgb(220, 55,25));
+		consoleGrille[tailleGrille-1][tailleGrille-1] = 4;
 
 		//Renvoi le layout de la grille
 		return root;
@@ -149,21 +147,5 @@ public class main extends Application {
 		return rect;
    }
 
-   public Case getCase(int x, int y)
-   {	
-		if(x < Casegrille.length && y < Casegrille[x].length) 	{return Casegrille[x][y];}
 
-		return null;
-   }
-
-   public void initialiseCasegrille()
-   {
-		for(int i = 0; i< tailleGrille; i++)
-		{
-			for(int y = 0; y< tailleGrille; y++)
-			{
-				Casegrille[i][y] = new Case(i,y);
-			}
-		}
-   }
 }

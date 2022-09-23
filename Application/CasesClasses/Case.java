@@ -7,11 +7,6 @@ public class Case {
     private int posY;
     private Categorie categorie;
 
-    public Case() {
-        this.posX = 0;
-        this.posY = 0;
-    }
-
     public Case(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;

@@ -5,7 +5,7 @@ import Joueur.Joueur;
 
 public class Jeu {
 
-    int tailleGrille = 10;
+    int tailleGrille = 4;
     Joueur player;
     int[][] consoleGrille;
     Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
@@ -14,16 +14,17 @@ public class Jeu {
 	Bonus bonus = new Bonus(0);
 
     public Jeu() {
-        Joueur player = new Joueur(15, Casegrille[0][0]);
+        initialiseCasegrille();
+        player = new Joueur(15, Casegrille[0][0]);
     }
 
     public Jeu(int[][] consoleGrille) {
 
         this.consoleGrille = consoleGrille;
-        
-        Joueur player = new Joueur(15, Casegrille[0][0]);
-
         initialiseCasegrille();
+        player = new Joueur(15, Casegrille[0][0]);
+
+
     }
 
     public int getTailleGrille()
@@ -44,9 +45,8 @@ public class Jeu {
 		{
 			for(int y = 0; y< tailleGrille; y++)
 			{
-				Casegrille[i][y] = new Case();
-                Casegrille[i][y].setPosX(i);
-                Casegrille[i][y].setPosY(y);
+				Casegrille[i][y] = new Case(i,y);
+
 
                 //'0' -> Vide / '1' -> Obstacle / '2' -> Bonus / '3' -> Joueur / '4' -> Maison
                 switch(consoleGrille[i][y])
@@ -86,5 +86,13 @@ public class Jeu {
         }
             
         return endurance;
+   }
+
+   public void testChange(int x, int y)
+   {
+        if(x != 0)
+        {
+            player.Deplacer(x,y);
+        }   
    }
 }

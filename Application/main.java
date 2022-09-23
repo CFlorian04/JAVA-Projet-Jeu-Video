@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 public class main extends Application {
 
-	int tailleGrille = 10;
+	int tailleGrille = 20;
 	//Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
 	char[][] consoleGrille = new char[tailleGrille][tailleGrille]; //Test avec la console
 
@@ -25,6 +25,7 @@ public class main extends Application {
    @Override
    public void start(Stage primaryStage) throws Exception {
 
+		//Clear la console
 		System.out.print("\033[H\033[2J");
 
 		/*Button btn = new Button();
@@ -37,13 +38,17 @@ public class main extends Application {
 			}
 		});*/
 
+		//Ajoute la grille graphique sur le layout
 		StackPane root = setGrille(tailleGrille);
+		//Ajoute le layout sur la scene
 		Scene scene = new Scene(root);
 
+		//Applique la scene sur l'interface graphique
 		setScene(primaryStage, scene, "Nom du Jeu", 700, 700);
 
    }
 
+   //Fonction qui applique la scene sur l'interface graphique
    public void setScene(Stage Stage ,Scene scene, String title, int hauteur, int largeur)
    {
 		Stage.setTitle(title);
@@ -53,6 +58,7 @@ public class main extends Application {
 		Stage.show();
    }
 
+   //Fonction qui créer la grille (console, case et graphique)
    public StackPane setGrille(int taille)
    {
 		StackPane root = new StackPane();
@@ -61,8 +67,8 @@ public class main extends Application {
 		//Obstacle rocher = new Obstacle(0);
 		//Casegrille[0][0].setCategorie(rocher);
 
-		//System.out.println(Casegrille[0][0]);
 
+		//Créer un rectangle et y associe un type de case pour chaque cases
 		for(int i = 0; i< taille; i++)
 		{
 			for(int y = 0; y< taille; y++)
@@ -77,8 +83,8 @@ public class main extends Application {
 				Casegrille[i][y].setCategorie(rocher);
 				*/
 
+				//Probabilité de changer une case vide par un obstacle/bonus
 				int rand = (int) (Math.random()*100);
-			
 				if(rand > 70) //30% -> Obstacle
 				{
 					consoleGrille[i][y] = 'X';
@@ -88,9 +94,10 @@ public class main extends Application {
 					consoleGrille[i][y] = 'B';
 				}
 			}
-			consoleGrille[0][0] = 'O';
-			consoleGrille[tailleGrille-1][tailleGrille-1] = 'M';
 		}
+		//Applique le personnage ('0') et la maison ('M') pour la console
+		consoleGrille[0][0] = 'O';
+		consoleGrille[tailleGrille-1][tailleGrille-1] = 'M';
 
 		
 
@@ -104,14 +111,17 @@ public class main extends Application {
 			System.out.println();
 		}
 
+		//Renvoi le layout de la grille
 		return root;
    }
 
+   //Fonction qui ajoute une figure dans un layout
    public void addShapeInLayout(Shape shape, StackPane stackPane)
    {
 		stackPane.getChildren().add(shape);
    }
 
+   //Fonction qui créer un rectangle et qui le renvoi
    public Rectangle createRectangle(int posX, int posY, int hauteur, int largeur)
    {
 		Rectangle rect = new Rectangle(posX,posY,largeur,hauteur);

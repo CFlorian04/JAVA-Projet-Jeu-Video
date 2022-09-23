@@ -1,11 +1,12 @@
 
 import CasesClasses.*;
-import MKeyListener.MKeyListener;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.*;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
@@ -39,9 +40,13 @@ public class main extends Application {
 		});*/
 
 		//Ajoute la grille graphique sur le layout
-		StackPane root = setGrille(tailleGrille);
+		GridPane layoutGrille = setGrille(tailleGrille);
+		layoutGrille.setPadding(new Insets(20));
+		layoutGrille.setHgap(5);
+		layoutGrille.setVgap(5);
+
 		//Ajoute le layout sur la scene
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(layoutGrille);
 
 		//Applique la scene sur l'interface graphique
 		setScene(primaryStage, scene, "Nom du Jeu", 700, 700);
@@ -59,9 +64,9 @@ public class main extends Application {
    }
 
    //Fonction qui créer la grille (console, case et graphique)
-   public StackPane setGrille(int taille)
+   public GridPane setGrille(int taille)
    {
-		StackPane root = new StackPane();
+		GridPane root = new GridPane();
 		Rectangle[][] Rectgrille = new Rectangle[taille][taille];
 
 		//Obstacle rocher = new Obstacle(0);
@@ -74,8 +79,8 @@ public class main extends Application {
 			for(int y = 0; y< taille; y++)
 			{
 
-				Rectgrille[i][y] = createRectangle(50*i, 50*y, 50, 50);
-				addShapeInLayout(Rectgrille[i][y],root);
+				Rectgrille[i][y] = createRectangle(50*i, 50*y, 25,25);
+				root.add(Rectgrille[i][y],i,y);
 				consoleGrille[i][y] = ' ';
 				/*
 				Casegrille[i][y].setPosX(i);
@@ -113,12 +118,6 @@ public class main extends Application {
 
 		//Renvoi le layout de la grille
 		return root;
-   }
-
-   //Fonction qui ajoute une figure dans un layout
-   public void addShapeInLayout(Shape shape, StackPane stackPane)
-   {
-		stackPane.getChildren().add(shape);
    }
 
    //Fonction qui créer un rectangle et qui le renvoi

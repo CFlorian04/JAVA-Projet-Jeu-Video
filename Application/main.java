@@ -53,11 +53,16 @@ public class main extends Application {
 
 		scene.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
 
-			for(int[] element : consoleGrille)
+			int playerX;
+			int playerY;
+			for(int i = 0; i< tailleGrille; i++)
 			{
-				for(int value : element)
+				for(int y = 0; y< tailleGrille; y++)
 				{
-					
+					if(consoleGrille[i][y] == 3)
+					{
+						//Applique les coordonnées
+					}
 				}
 			}
 		

@@ -66,5 +66,10 @@ public class Jeu {
    }
 
 
-   aaaa
+   public boolean canGo(Case départ, Case arrivé, int[][] Grille) {
+    int x, y;
+    if(arrivé.getPosX())
+    return false;
+
+   }
 }

@@ -68,7 +68,7 @@ public class Jeu {
 
    public boolean canGo(Case départ, Case arrivé, int[][] Grille) {
     int x, y;
-    if(arrivé.getPosX())
+    if(arrivé.getPosX() == )
     return false;
 
    }

@@ -1,19 +1,13 @@
 import CasesClasses.*;
 import Joueur.Joueur;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.*;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.shape.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 
@@ -43,6 +37,10 @@ public class main extends Application {
 			}
 		});*/
 
+		Joueur player = new Joueur(15, Casegrille[0][0]);
+
+		
+
 		//Ajoute la grille graphique sur le layout
 		GridPane layoutGrille = setGrille(tailleGrille);
 		layoutGrille.setPadding(new Insets(20));
@@ -52,26 +50,32 @@ public class main extends Application {
 		//Ajoute le layout sur la scene
 		Scene scene = new Scene(layoutGrille);
 
-
 		//Applique la scene sur l'interface graphique
 		setScene(primaryStage, scene, "Nom du Jeu", tailleGrille*30 + 200,  tailleGrille*30 + 200);
 
 		scene.addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
+			int posX = 0/*player.getCaseOccupe().getPosX()*/;
+			int posY = 0/*player.getCaseOccupe().getPosY()*/;
 			if(event.getCode() == KeyCode.LEFT)
 			{
 				System.out.println("Fleche Gauche");
+				System.out.println(Casegrille[posX-1][posY].getCategorie());
+				player.Deplacer(posX-1,posY);
 			}
 			else if(event.getCode() == KeyCode.RIGHT)
 			{
 				System.out.println("Fleche Droite");
+				player.Deplacer(posX+1,posY);
 			}
 			else if(event.getCode() == KeyCode.UP)
 			{
 				System.out.println("Fleche Haut");
+				player.Deplacer(posX,posY-1);
 			}
 			else if(event.getCode() == KeyCode.DOWN)
 			{
 				System.out.println("Fleche Bas");
+				player.Deplacer(posX,posY+1);
 			}
 		});
 
@@ -94,12 +98,13 @@ public class main extends Application {
    //Fonction qui créer la grille (console, case et graphique)
    public GridPane setGrille(int taille)
    {
+		initialiseCasegrille();
 
 		GridPane root = new GridPane();
 		Rectangle[][] Rectgrille = new Rectangle[taille][taille];
 
-		//Obstacle obstacle = new Obstacle(0);
-		//Bonus bonus = new Bonus(0);
+		Obstacle obstacle = new Obstacle(0);
+		Bonus bonus = new Bonus(0);
 		
 		//Créer un rectangle et y associe un type de case pour chaque cases
 		for(int i = 0; i< taille; i++)
@@ -110,23 +115,19 @@ public class main extends Application {
 				Rectgrille[i][y] = createRectangle(50*i, 50*y, 25,25);
 				Rectgrille[i][y].setFill(Color.rgb(100, 255,100));
 				root.add(Rectgrille[i][y],i,y);
-				/*
-				Casegrille[i][y].setPosX(i);
-				Casegrille[i][y].setPosY(y);
-				Casegrille[i][y].setCategorie(rocher);
-				*/
+
 
 				//Probabilité de changer une case vide par un obstacle/bonus
 				int rand = (int) (Math.random()*100);
 				if(rand > 70) //30% -> Obstacle
 				{
 					Rectgrille[i][y].setFill(Color.rgb(194, 194,194));
-					//Casegrille[i][y].setCategorie(obstacle);
+					Casegrille[i][y].setCategorie(obstacle);
 				}
 				else if(rand < 2) //2% -> Bonus
 				{
 					Rectgrille[i][y].setFill(Color.rgb(243, 243,43));
-					//Casegrille[i][y].setCategorie(bonus);
+					Casegrille[i][y].setCategorie(bonus);
 				}
 			}
 		}
@@ -153,5 +154,16 @@ public class main extends Application {
 		if(x < Casegrille.length && y < Casegrille[x].length) 	{return Casegrille[x][y];}
 
 		return null;
+   }
+
+   public void initialiseCasegrille()
+   {
+		for(int i = 0; i< tailleGrille; i++)
+		{
+			for(int y = 0; y< tailleGrille; y++)
+			{
+				Casegrille[i][y] = new Case(i,y);
+			}
+		}
    }
 }

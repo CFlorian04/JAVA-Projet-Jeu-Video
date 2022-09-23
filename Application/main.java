@@ -6,8 +6,10 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.*;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.*;
@@ -18,7 +20,7 @@ import javafx.stage.Stage;
 public class main extends Application {
 
 	int tailleGrille = 10;
-	//Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
+	Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
 	char[][] consoleGrille = new char[tailleGrille][tailleGrille]; //Test avec la console
 
 	
@@ -45,19 +47,20 @@ public class main extends Application {
 		//Ajoute la grille graphique sur le layout
 		GridPane layoutGrille = setGrille(tailleGrille);
 		layoutGrille.setPadding(new Insets(20));
-		layoutGrille.setHgap(5);
-		layoutGrille.setVgap(5);
+		layoutGrille.setHgap(2);
+		layoutGrille.setVgap(2);
 
 		//Ajoute le layout sur la scene
 		Scene scene = new Scene(layoutGrille);
 
 		//Applique la scene sur l'interface graphique
-		setScene(primaryStage, scene, "Nom du Jeu", tailleGrille*30 + 100,  tailleGrille*30 + 100);
+		setScene(primaryStage, scene, "Nom du Jeu", tailleGrille*30 + 200,  tailleGrille*30 + 200);
 
 		scene.addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
 			if(event.getCode() == KeyCode.LEFT)
 			{
 				System.out.println("Fleche Gauche");
+
 			}
 			else if(event.getCode() == KeyCode.RIGHT)
 			{
@@ -82,12 +85,21 @@ public class main extends Application {
 		Stage.setScene(scene);
 		Stage.setHeight(hauteur);
 		Stage.setWidth(largeur);
+		Stage.setMaxHeight(hauteur);
+		Stage.setMaxWidth(largeur);
+		Stage.setMinHeight(hauteur);
+		Stage.setMinWidth(largeur);
 		Stage.show();
    }
 
    //Fonction qui créer la grille (console, case et graphique)
    public GridPane setGrille(int taille)
    {
+		//Integration des images
+		//Image image = new Image("myImage");
+		//ImagePattern imagePattern = new ImagePattern(image);
+		//Rectgrille[i][y].setFill(imagePattern);
+
 		GridPane root = new GridPane();
 		Rectangle[][] Rectgrille = new Rectangle[taille][taille];
 
@@ -155,6 +167,13 @@ public class main extends Application {
 		//rect.setFill(Color.GREEN);
 		//rect.setStroke(Color.BLACK);
 		return rect;
+   }
+
+   public Case getCase(int x, int y)
+   {	
+		if(x < Casegrille.length && y < Casegrille[x].length) 	{return Casegrille[x][y];}
+
+		return null;
    }
 }
 

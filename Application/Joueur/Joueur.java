@@ -24,15 +24,17 @@ public class Joueur {
     public int MarcheX(int pats) {
         if(endurance > 0){
             caseOccupe.setPosX(caseOccupe.getPosX()+pats);
+            endurance -= 1;
         }
-        endurance -= 1;
+        
         return this.endurance;
     }
     public int MarcheY(int pats) {
         if(endurance > 0){
             caseOccupe.setPosY(caseOccupe.getPosY()+pats);
+            endurance -= 1;
         }
-        endurance -= 1;
+        
         return this.endurance;
     }
 

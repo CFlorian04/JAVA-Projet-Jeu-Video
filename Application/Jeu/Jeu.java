@@ -11,26 +11,32 @@ public class Jeu {
     final int HAUT = 3;
 
     int tailleGrille = 0;
-    Case[][] Casegrille;
+    
     Joueur player;
     int[][] consoleGrille;
+    Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
 
     Obstacle obstacle = new Obstacle(0);
 	Bonus bonus = new Bonus(0);
 
-    public Jeu(int tailleGrille, int[][] consoleGrille) {
-
-        this.tailleGrille = tailleGrille;
-        this.consoleGrille = consoleGrille;
-
-        Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
-        Joueur player = new Joueur(15, Casegrille[0][0]);
-
-        System.out.println(consoleGrille);
-
-        //initialiseCasegrille();
+    public Jeu() {
+        initialiseCasegrille();
+        player = new Joueur(15, Casegrille[0][0]);
     }
 
+    public Jeu(int[][] consoleGrille) {
+
+        this.consoleGrille = consoleGrille;
+        initialiseCasegrille();
+        player = new Joueur(15, Casegrille[0][0]);
+
+
+    }
+
+    public int getTailleGrille()
+    {
+        return tailleGrille;
+    }
 
     public Case getCase(int x, int y)
     {	
@@ -45,9 +51,8 @@ public class Jeu {
 		{
 			for(int y = 0; y< tailleGrille; y++)
 			{
-				Casegrille[i][y] = new Case();
-                Casegrille[i][y].setPosX(i);
-                Casegrille[i][y].setPosY(y);
+				Casegrille[i][y] = new Case(i,y);
+
 
                 //'0' -> Vide / '1' -> Obstacle / '2' -> Bonus / '3' -> Joueur / '4' -> Maison
                 switch(consoleGrille[i][y])
@@ -122,8 +127,23 @@ public class Jeu {
         return voisins;
     }
 
-   public void changerPosJoueur(int x, int y)
+   public int changerPosJoueur(int x, int y)
    {
-    player.Deplacer(x, y);
+        int endurance = 0;
+
+        if(x != 0)
+        {
+            endurance = player.Marche(x,y);
+        }
+            
+        return endurance;
+   }
+
+   public void testChange(int x, int y)
+   {
+        if(x != 0)
+        {
+            player.Deplacer(x,y);
+        }   
    }
 }

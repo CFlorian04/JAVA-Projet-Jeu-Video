@@ -13,7 +13,7 @@ public class Joueur {
 
     /**
      * 
-     * @param dir prent l'une des possibilité
+     * @param dir prend l'une des possibilité
      * @return vrai si déplacement éffectué
      */
     public void Deplacer(int destX, int destY) {
@@ -21,18 +21,11 @@ public class Joueur {
         caseOccupe.setPosY(destY);
     }
 
-    public int MarcheX(int pats) {
-        if(endurance > 0){
-            caseOccupe.setPosX(caseOccupe.getPosX()+pats);
-            endurance -= 1;
-        }
-        
-        return this.endurance;
-    }
-    public int MarcheY(int pats) {
-        if(endurance > 0){
-            caseOccupe.setPosY(caseOccupe.getPosY()+pats);
-            endurance -= 1;
+    public int Marche(int destX, int destY) {
+        if(this.endurance > 0){
+            caseOccupe.setPosX(destX);
+            caseOccupe.setPosY(destY);
+            this.endurance -= 1;
         }
         
         return this.endurance;

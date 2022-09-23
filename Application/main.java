@@ -58,18 +58,19 @@ public class main extends Application {
 
 			int playerX = 0;
 			int playerY = 0;
-			int endurance = 0 ;
+			//int endurance = 0 ;
 			boolean move = false;
 			
 			if(event.getCode() == KeyCode.LEFT)
 			{	
-				if(playerX > 0)
+				if(playerX-1 > 0)
 				{
 					if(consoleGrille[playerX-1][playerY] != 1)
 					{
 						consoleGrille[playerX][playerY] = 0;
 						consoleGrille[playerX-1][playerY] = 3;
-						endurance = Jeu.changerPosJoueur(playerX-1,playerY);
+						//endurance = Jeu.changerPosJoueur(playerX-1,playerY);
+						Jeu.testChange(playerX-1, playerY);
 						move = true;
 						System.out.print("Done ->");
 					}
@@ -79,13 +80,14 @@ public class main extends Application {
 			}
 			else if(event.getCode() == KeyCode.RIGHT)
 			{
-				if(playerX < tailleGrille)
+				if(playerX+1 < tailleGrille)
 				{
 					if(consoleGrille[playerX+1][playerY] != 1)
 					{
 						consoleGrille[playerX][playerY] = 0;
 						consoleGrille[playerX+1][playerY] = 3;
-						endurance = Jeu.changerPosJoueur(playerX+1,playerY);
+						//endurance = Jeu.changerPosJoueur(playerX+1,playerY);
+						Jeu.testChange(playerX+1,playerY);
 						move = true;
 						System.out.print("Done ->");
 					}
@@ -94,13 +96,14 @@ public class main extends Application {
 			}
 			else if(event.getCode() == KeyCode.UP)
 			{
-				if(playerY > 0)
+				if(playerY-1 > 0)
 				{
 					if(consoleGrille[playerX][playerY-1] != 1)
 					{
 						consoleGrille[playerX][playerY] = 0;
 						consoleGrille[playerX][playerY-1] = 3;
-						endurance = Jeu.changerPosJoueur(playerX,playerY-1);
+						//endurance = Jeu.changerPosJoueur(playerX,playerY-1);
+						Jeu.testChange(playerX+1,playerY);
 						move = true;
 						System.out.print("Done ->");
 					}
@@ -109,13 +112,14 @@ public class main extends Application {
 			}
 			else if(event.getCode() == KeyCode.DOWN)
 			{
-				if(playerY < tailleGrille)
+				if(playerY+1 < tailleGrille)
 				{
 					if(consoleGrille[playerX][playerY+1] != 1)
 					{
 						consoleGrille[playerX][playerY] = 0;
 						consoleGrille[playerX][playerY+1] = 3;
-						endurance = Jeu.changerPosJoueur(playerX,playerY+1);
+						//endurance = Jeu.changerPosJoueur(playerX,playerY+1);
+						Jeu.testChange(playerX+1,playerY);
 						move = true;
 						System.out.print("Done ->");
 					}
@@ -127,11 +131,11 @@ public class main extends Application {
 			{
 				//Mettre à jour la grille
 				//Applique la scene sur l'interface graphique
-				setScene(primaryStage, scene, "Nom du Jeu", tailleGrille*30 + 200,  tailleGrille*30 + 200);
+				setScene(primaryStage, updateScene(), "Nom du Jeu", tailleGrille*30 + 200,  tailleGrille*30 + 200);
 			}
 
 			/*  Print du tableau en console */
-			System.out.println("Endurance : " + endurance);
+			//System.out.println("Endurance : " + endurance);
 			for(int i = 0; i< tailleGrille; i++)
 			{
 				for(int y = 0; y< tailleGrille; y++)
@@ -208,7 +212,7 @@ public class main extends Application {
    }
 
 
-   public GridPane setUpdateGrille() {
+   /*public GridPane setUpdateGrille() {
 
 		GridPane root = new GridPane();
 		Rectangle[][] Rectgrille = new Rectangle[tailleGrille][tailleGrille];
@@ -247,12 +251,12 @@ public class main extends Application {
 		}
 		return root;
    }
-
+*/
 
    public Scene updateScene()
    {
 		//Ajoute la grille graphique sur le layout
-		GridPane layoutGrille = setUpdateGrille();
+		GridPane layoutGrille = setGrille();
 		layoutGrille.setPadding(new Insets(20));
 		layoutGrille.setHgap(2);
 		layoutGrille.setVgap(2);

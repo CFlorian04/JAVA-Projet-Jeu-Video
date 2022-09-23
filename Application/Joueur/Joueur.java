@@ -22,10 +22,10 @@ public class Joueur {
     }
 
     public int Marche(int destX, int destY) {
-        if(endurance > 0){
+        if(this.endurance > 0){
             caseOccupe.setPosX(destX);
             caseOccupe.setPosY(destY);
-            endurance -= 1;
+            this.endurance -= 1;
         }
         
         return this.endurance;

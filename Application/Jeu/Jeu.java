@@ -5,6 +5,11 @@ import Joueur.Joueur;
 
 public class Jeu {
 
+    final int DROITE = 0;
+    final int BAS = 1;
+    final int GAUCHE = 2;
+    final int HAUT = 3;
+
     int tailleGrille = 0;
     Case[][] Casegrille;
     Joueur player;
@@ -66,12 +71,57 @@ public class Jeu {
    }
 
 
-   public boolean canGo(Case départ, Case arrivé, int[][] Grille) {
-    int x, y;
-    if(arrivé.getPosX() == )
-    return false;
+   /**
+    * Test si un chemin est possible vers l'arrivée
+    * @param current case courante
+    * @param arrivé case objectif
+    * @param Grille grille du jeu
+    * @return vrai si chemin possible
+    */
+   public boolean canGo(Case current, Case arrivé, int[][] Grille) {
+        Case[] voisins;
+
+        if(current.getCategorie() instanceof Obstacle){//si la case est un obstacle, retourner faux
+            return false;
+        }else if(current.voisin(arrivé)){//sinon si la case est à côté de l'arrivé retourner vrai
+            return true;
+        }else {
+            voisins = getVoisins(current);//obtention des voisins de la case
+
+            if((current = voisins[DROITE]) != null){//si case à droite éxiste
+
+                if (canGo(current, arrivé, Grille)) return true; // retourner vrai si chemin trouvé
+                
+            }if((current = voisins[GAUCHE]) != null){
+
+                if (canGo(current, arrivé, Grille)) return true;
+
+            }if((current = voisins[HAUT]) != null){
+                
+                if (canGo(current, arrivé, Grille)) return true;
+                
+            }if((current = voisins[BAS]) != null){
+
+                if (canGo(current, arrivé, Grille)) return true;
+                
+            }
+        }
+        return false;
 
    }
+
+   public Case[] getVoisins (Case c) {
+        Case[] voisins = new Case[4];
+        int x = c.getPosX();
+        int y = c.getPosY();
+
+        voisins [DROITE] = this.getCase(x +1, y);
+        voisins [GAUCHE] = this.getCase(x -1, y);
+        voisins [HAUT] = this.getCase(x, y +1);
+        voisins [BAS] = this.getCase(x, y -1);
+
+        return voisins;
+    }
 
    public void changerPosJoueur(int x, int y)
    {

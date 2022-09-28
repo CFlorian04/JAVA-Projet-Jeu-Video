@@ -34,7 +34,7 @@ Case.java [Categorie] :
 Categorie.java [Obstacle,Bonus] :
 - Initialisation de l'endurance perdu
 - Initialisation de l'image
-- Récupération de l'endurance
+- Récupération de l'endurance perdu
 
 Obstacle.java :
 - Initialisation d'un type d'obstacle

@@ -1,51 +1,44 @@
 package Joueur;
 
-import CasesClasses.Case;
+import Case.Case;
+
 
 public class Joueur {
-    int endurance;
-    Case caseOccupe;
-	
-	public Joueur(int endurance, Case caseOccupe) {
-		this.endurance = endurance;
-        this.caseOccupe = caseOccupe;
-	}
+    int joueurEndurance;
+    Case joueurCaseOccupee;
 
-    /**
-     * 
-     * @param dir prend l'une des possibilité
-     * @return vrai si déplacement éffectué
-     */
-    public void Deplacer(int destX, int destY) {
-        caseOccupe.setPosX(destX);
-        caseOccupe.setPosY(destY);
+
+    public Joueur(int joueurEndurance, Case joueurCaseOccupee) {
+        this.joueurEndurance = joueurEndurance;
+        this.joueurCaseOccupee = joueurCaseOccupee;
     }
 
-    public int Marche(int destX, int destY) {
-        if(this.endurance > 0){
-            caseOccupe.setPosX(destX);
-            caseOccupe.setPosY(destY);
-            this.endurance -= 1;
+    public int getJoueurEndurance() {
+        return joueurEndurance;
+    }
+
+    public void setJoueurEndurance(int joueurEndurance) {
+        this.joueurEndurance = joueurEndurance;
+    }
+
+    public Case getJoueurCaseOccupee() {
+        return joueurCaseOccupee;
+    }
+
+    public void setJoueurCaseOccupee(Case joueurCaseOccupee) {
+        this.joueurCaseOccupee = joueurCaseOccupee;
+    }
+    
+    public boolean Déplacer(int caseCoordX, int caseCoordY)
+    {
+        if(joueurEndurance > 0)
+        {
+            joueurCaseOccupee.setCaseCoordX(caseCoordX);
+            joueurCaseOccupee.setCaseCoordY(caseCoordY);
+            this.joueurEndurance -= 1;
+            return true;
         }
-        
-        return this.endurance;
+        return false;
     }
 
-    
-    public Case getCaseOccupe() {
-        return caseOccupe;
-    }
-
-    public int getEndurance (){
-        return this.endurance;
-    }
-
-    public void setEndurance(int endurance) {
-        this.endurance = endurance;
-    }
-
-    public void setCaseOccupe(Case caseOccupe) {
-        this.caseOccupe = caseOccupe;
-    }
-    
 }

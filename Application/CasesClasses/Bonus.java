@@ -25,6 +25,9 @@ public class Bonus extends Categorie {
             default : this.setModifEndurance(0);
                     break;
         }
+        public char toChar() {
+                return 'O';
+        }
     }
 
 }

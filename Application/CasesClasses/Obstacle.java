@@ -23,6 +23,10 @@ public class Obstacle extends Categorie {
             default : this.setModifEndurance(0);
                     break;
         }
+
+        public char toChar() {
+                return 'X';
+        }
     }
     
 }

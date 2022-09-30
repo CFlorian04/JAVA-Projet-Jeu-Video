@@ -54,5 +54,9 @@ public class Case {
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
     }
+
+    public char toChar() {
+        return this.getCategorie().getChar();
+    }
     
 }

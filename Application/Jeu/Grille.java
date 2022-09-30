@@ -138,4 +138,15 @@ public class Grille {
  
          return null;
     }
+
+    public char[][] toChar() {
+        char [largeur][hauteur] charTab;
+        for(Case [] x : this.Casegrille){
+            for(Case y : x){
+                charTab[x][y] = this.Casegrille[x][y].toChar();
+            }
+        }
+    }
+
+    return charTab;
 }

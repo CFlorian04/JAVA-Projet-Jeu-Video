@@ -18,7 +18,11 @@ public class main extends Application {
 	int[][] consoleGrille = new int[tailleGrille][tailleGrille];
 	Jeu Jeu;
 	public static void main(String[] args) {
-        launch(args);
+        // TEST CanGO
+		Grille testGrille = new Grille(int tailleGrille);
+		System.out.print(testGrille.canGo());
+
+		//launch(args);
     }
 
    @Override

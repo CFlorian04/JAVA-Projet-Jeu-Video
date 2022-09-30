@@ -5,9 +5,11 @@ public class Categorie
 {
     int modifEndurance;
     String imageSrc;
+    char charType;
 
-    public Categorie() {
+    public Categorie(char charType) {
         this.modifEndurance = 0;
+        this.charType = charType;
     }
 
     public int getModifEndurance() {
@@ -28,5 +30,8 @@ public class Categorie
         this.imageSrc = imageSrc;
     }
 
+    public char getCharType() {
+        return charType;
+    }
     
 }

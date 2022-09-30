@@ -1,7 +1,7 @@
 package CasesClasses;
 
 
-public class Case {
+public class Case implements Comparable{
 
     private int posX;
     private int posY;
@@ -53,6 +53,23 @@ public class Case {
 
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
+    }
+
+    public char toChar() {
+        if (this.categorie!= null){
+            return this.getCategorie().getCharType();
+        } else return '_';//si case vide retourner _
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        // TODO Auto-generated method stub
+        Case compare = (Case) o;
+        int selfPoint = this.posX + this.posY;
+        int comparePoint = compare.getPosX() + compare.getPosY();
+        if(selfPoint > comparePoint) return 1;
+        else if (selfPoint < comparePoint) return -1;
+        else return 0;
     }
     
 }

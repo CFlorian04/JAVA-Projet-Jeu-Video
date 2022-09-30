@@ -1,3 +1,5 @@
+import CasesClasses.Case;
+import Jeu.Grille;
 import Jeu.Jeu;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -18,7 +20,22 @@ public class main extends Application {
 	int[][] consoleGrille = new int[tailleGrille][tailleGrille];
 	Jeu Jeu;
 	public static void main(String[] args) {
-        launch(args);
+        
+		// TEST CanGO
+		Grille testGrille = new Grille(6, 6);
+		char [][] charTestGrille = testGrille.toChar();
+		StringBuilder str = new StringBuilder();
+		for(char [] l : charTestGrille){
+			for(char c : l){
+				str.append(c);
+				
+			}
+			str.append('\n');
+		}
+		System.out.println(str);
+		System.out.print(testGrille.canGo(new Case(0, 0), new Case(5, 5)));
+
+		//launch(args);
     }
 
    @Override

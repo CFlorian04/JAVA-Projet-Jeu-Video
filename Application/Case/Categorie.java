@@ -2,10 +2,12 @@ package Case;
 
 public class Categorie {
     
+    char charType;
     int categorieModifEndurance;
     String categorieImage;
 
-    public Categorie(int categorieModifEndurance, String categorieImage) {
+    public Categorie(char charType,int categorieModifEndurance, String categorieImage) {
+        this.charType = charType;
         this.categorieModifEndurance = categorieModifEndurance;
         this.categorieImage = categorieImage;
     }
@@ -24,6 +26,10 @@ public class Categorie {
 
     public void setCategorieImage(String categorieImage) {
         this.categorieImage = categorieImage;
+    }
+
+    public char getCharType() {
+        return charType;
     }
 
     

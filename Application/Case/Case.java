@@ -56,6 +56,12 @@ public class Case {
         }
         else return false;// c n'est pas voisin
     }
+
+    public char toChar() {
+        if (this.caseCategorie!= null){
+            return this.getCaseCategorie().getCharType();
+        } else return '_';
+    }
     
     
 }

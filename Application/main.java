@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -12,7 +13,9 @@ import Jeu.Jeu;
 
 public class main extends Application {
 
-  String[][] grilleMain = new String[][]
+  Scene scene;
+  Jeu jeu;
+  char[][] grilleMain;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -20,20 +23,33 @@ public class main extends Application {
 
    public void start(Stage primaryStage) throws Exception {
 
-    Jeu jeu = new Jeu()
-    grilleMain = jeu.getGrilletoString();
+    jeu = new Jeu(scene);
+    grilleMain = jeu.getJeuChar();
 
     GridPane layoutGrille = setGrille();
 		layoutGrille.setPadding(new Insets(20));
 		layoutGrille.setHgap(2);
 		layoutGrille.setVgap(2);
-    Scene scene = new Scene(layoutGrille);
+    scene = new Scene(layoutGrille);
 
 
-    
-    setScene(primaryStage, scene, "", jeu.getTailleGrille()*30 + 200,  jeu.getTailleGrille()*30 + 200);
+    setScene(primaryStage, scene, "Don't Forget the Road", jeu.getTailleGrille()*30 + 200,  jeu.getTailleGrille()*30 + 200);
 
 
+
+   }
+
+   public void setScene(Stage Stage ,Scene scene, String title, int hauteur, int largeur)
+   {
+		Stage.setTitle(title);
+		Stage.setScene(scene);
+		Stage.setHeight(hauteur);
+		Stage.setWidth(largeur);
+		Stage.setMaxHeight(hauteur);
+		Stage.setMaxWidth(largeur);
+		Stage.setMinHeight(hauteur);
+		Stage.setMinWidth(largeur);
+		Stage.show();
    }
 
 
@@ -47,29 +63,33 @@ public class main extends Application {
       //Créer un rectangle et y associe un type de case pour chaque cases
       for(int i = 0; i< jeu.getTailleGrille(); i++)
       {
-        Rectgrille[i][y] = createRectangle(50*i, 50*y, 25,25);
+        
         for(int y = 0; y< jeu.getTailleGrille(); y++)
         {
 
+        System.out.print(grilleMain[i][y]);
+        Rectgrille[i][y] = createRectangle(50*i, 50*y, 25,25);
+
         switch (grilleMain[i][y])
         {
-          case ' ' : //Case Vide  
-                      Rectgrille[i][y].setFill(Color.rgb(100, 255,100));
-                      break;
 
           case 'X' : //Case Obstacle  
-                      Rectgrille[i][y].setFill(Color.rgb(100, 255,100));
+                      Rectgrille[i][y].setFill(Color.rgb(255,100,100));
                       break;
 
           case 'O' : //Case Bonus
-                      Rectgrille[i][y].setFill(Color.rgb(100, 255,100));
+                      Rectgrille[i][y].setFill(Color.rgb(255, 255,100));
                       break;
 
           case 'A' : //Case Joueur 
-                      Rectgrille[i][y].setFill(Color.rgb(100, 255,100));
+                      Rectgrille[i][y].setFill(Color.rgb(100, 100,255));
                       break;
 
           case 'M' : //Case Maison
+                      Rectgrille[i][y].setFill(Color.rgb(100, 255,255));
+                      break;
+
+          case '_' : //Case Vide  
                       Rectgrille[i][y].setFill(Color.rgb(100, 255,100));
                       break;
         }          
@@ -77,10 +97,19 @@ public class main extends Application {
         root.add(Rectgrille[i][y],i,y);
          
         }
+        System.out.println(" ");
       }
 
       //Renvoi le layout de la grille
       return root;
     }
 
+    //Fonction qui créer un rectangle et qui le renvoi
+   public Rectangle createRectangle(int posX, int posY, int hauteur, int largeur)
+   {
+		Rectangle rect = new Rectangle(posX,posY,largeur,hauteur);
+		return rect;
+   }
+
 }
+

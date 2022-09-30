@@ -16,37 +16,37 @@ public class KeyEvent {
         this.joueurKeyEvent = joueur;
         this.sceneKeyEvent = scene;
         this.grilleKeyEvent = grille;
-        SceneAddKeyEvent();
+        SceneAddKeyEvent(sceneKeyEvent);
     }
 
-    public SceneAddKeyEvent(){
+    public void SceneAddKeyEvent(Scene sceneKeyEvent){
 
         sceneKeyEvent.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
-			int joueurCoordX = joueur.getJoueurCaseOccupee().getCaseCoordX();
-            int joueurCoordY = joueur.getJoueurCaseOccupee().getCaseCoordY();
+			int joueurCoordX = joueurKeyEvent.getJoueurCaseOccupee().getCaseCoordX();
+            int joueurCoordY = joueurKeyEvent.getJoueurCaseOccupee().getCaseCoordY();
 
 			if(event.getCode() == KeyCode.LEFT)
 			{
 				System.out.println("Fleche Gauche");
-                if(grilleKeyEvent.getCase(joueurCoordX-1,joueurCoordY).getCategorie() != )
+                if(true )
                 {
-                    joueur.Déplacer(joueurCoordX-1,joueurCoordY);
+                    joueurKeyEvent.Déplacer(joueurCoordX-1,joueurCoordY);
                 }
 
 			}
 			else if(event.getCode() == KeyCode.RIGHT)
 			{
 				System.out.println("Fleche Droite");
-                joueur.Déplacer(joueurCoordX-1,joueurCoordY);
+                joueurKeyEvent.Déplacer(joueurCoordX-1,joueurCoordY);
 			}
 			else if(event.getCode() == KeyCode.UP)
 			{
 				System.out.println("Fleche Haut");
-                joueur.Déplacer(joueurCoordX-1,joueurCoordY);
+                joueurKeyEvent.Déplacer(joueurCoordX-1,joueurCoordY);
 			}
 			else if(event.getCode() == KeyCode.DOWN)
 			{
-                joueur.Déplacer(joueurCoordX-1,joueurCoordY);
+                joueurKeyEvent.Déplacer(joueurCoordX-1,joueurCoordY);
 				System.out.println("Fleche Bas");
 			}
 		});

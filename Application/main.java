@@ -7,7 +7,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-
+import Jeu.Jeu;
 
 
 public class main extends Application {
@@ -18,7 +18,7 @@ public class main extends Application {
 
    public void start(Stage primaryStage) throws Exception {
 
-		
+		Jeu jeu = new Jeu()
 
    }
 

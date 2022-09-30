@@ -1,14 +1,14 @@
-Main.java [Jeu,KeyEvent] :
+Main.java [Jeu] :
 - Partie Graphique
 - Changement Graphique
 - Création de la grille graphique [Grille]
 
-KeyEvent.java :
-- Commande de Jeu (KeyEvent)
-
-Jeu.java [Grille,Joueur] :
+Jeu.java [Grille,Joueur,KeyEvent] :
 - Lien entre la Grille et le Joueur [Grille,Joueur]
 - Déplacement du joueur sur la grille
+
+KeyEvent.java :
+- Commande de Jeu (KeyEvent)
 
 Grille.java [Case] :
 - Création de la grille aléatoire

@@ -25,5 +25,15 @@ public class Jeu {
         this.keyEventJeu = new KeyEvent(scene,joueurJeu,grilleJeu);
 
     }
+
+    public int getTailleGrille()
+    {
+        return tailleGrille;
+    }
     
+
+    public String[][] getGrilletoString()
+    {
+        return grilleJeu.toString();
+    }
 }

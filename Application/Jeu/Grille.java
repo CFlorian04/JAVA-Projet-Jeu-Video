@@ -11,6 +11,7 @@ public class Grille {
     int hauteur;
     int largeur;
     Case[][] Casegrille;
+
     public Grille(int tailleGrille){
         hauteur = tailleGrille;
         largeur = tailleGrille;
@@ -26,20 +27,31 @@ public class Grille {
     }
 
     private void initialiseCasegrille() {
-		for(int i = 0; i< largeur; i++)
+		for(int x = 0; x< largeur; x++)
 		{
 			for(int y = 0; y< hauteur; y++)
 			{
-				Casegrille[i][y] = new Case(i,y);
+                int rand = (int) (Math.random()*100);
+				
+
+                if(rand > 70) //30% -> Obstacle
+				{
+                    Casegrille[x][y] = new Case(x,y, new Obstacle(0) );
+				}
+				else if(rand < 2) //2% -> Bonus
+				{
+					Casegrille[x][y] = new Case(x,y, new Bonus(0));
+				} else Casegrille[x][y] = new Case(x,y);
+                
 
                 /*
                 //'0' -> Vide / '1' -> Obstacle / '2' -> Bonus / '3' -> Joueur / '4' -> Maison
-                switch(consoleGrille[i][y])
+                switch(consoleGrille[x][y])
                 {
                     case 0 :    break;
-                    case 1 :    Casegrille[i][y].setCategorie(obstacle);
+                    case 1 :    Casegrille[x][y].setCategorie(obstacle);
                                 break;
-                    case 2 :    Casegrille[i][y].setCategorie(bonus);
+                    case 2 :    Casegrille[x][y].setCategorie(bonus);
                                 break;
                     case 3 :    break;
                     case 4 :    break;
@@ -59,7 +71,7 @@ public class Grille {
     public boolean canGo(Case current, Case arrivé, int[][] Grille) {
         Case[] voisins;
 
-        if(current.getCategorie() instanceof Obstacle){//si la case est un obstacle, retourner faux
+        if(current.getCategorie() instanceof Obstacle){//si la case courente est un obstacle, retourner faux
             return false;
         }else if(current.voisin(arrivé)){//sinon si la case est à côté de l'arrivé retourner vrai
             return true;
@@ -68,7 +80,7 @@ public class Grille {
 
             if((current = voisins[DROITE]) != null){//si case à droite éxiste
 
-                if (canGo(current, arrivé, Grille)) return true; // retourner vrai si chemin trouvé
+                if (canGo(current, arrivé, Grille)) return true; // tenter un chemin, retourner vrai si chemin trouvé
                 
             }if((current = voisins[GAUCHE]) != null){
 

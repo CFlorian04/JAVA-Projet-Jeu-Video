@@ -56,7 +56,9 @@ public class Case {
     }
 
     public char toChar() {
-        return this.getCategorie().getChar();
+        if (this.categorie!= null){
+            return this.getCategorie().getCharType();
+        } else return ' ';
     }
     
 }

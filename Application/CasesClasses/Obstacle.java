@@ -5,7 +5,7 @@ public class Obstacle extends Categorie {
     int type;
 
     public Obstacle(int type) {
-        super();
+        super('X');
         this.type = type;
 
         //En fonction du type d'obstacle choisi
@@ -24,9 +24,7 @@ public class Obstacle extends Categorie {
                     break;
         }
 
-        public char toChar() {
-                return 'X';
-        }
+
     }
     
 }

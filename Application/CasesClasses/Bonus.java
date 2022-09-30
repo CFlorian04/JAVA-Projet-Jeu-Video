@@ -7,7 +7,7 @@ public class Bonus extends Categorie {
     int type;
 
     public Bonus(int type) {
-        super();
+        super('O');
         this.type = type;
 
         //En fonction du type de bonus choisi
@@ -24,9 +24,6 @@ public class Bonus extends Categorie {
 
             default : this.setModifEndurance(0);
                     break;
-        }
-        public char toChar() {
-                return 'O';
         }
     }
 

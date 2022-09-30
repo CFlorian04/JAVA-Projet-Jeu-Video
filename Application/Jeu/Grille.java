@@ -1,5 +1,8 @@
 package Jeu;
 
+import java.util.ArrayList;
+
+import CasesClasses.Bonus;
 import CasesClasses.Case;
 import CasesClasses.Obstacle;
 
@@ -68,8 +71,9 @@ public class Grille {
     * @param Grille grille du jeu
     * @return vrai si chemin possible
     */
-    public boolean canGo(Case current, Case arrivé, int[][] Grille) {
+    public boolean canGo(Case current, Case arrivé) {
         Case[] voisins;
+        ArrayList<Case> historique = new ArrayList<Case>();
 
         if(current.getCategorie() instanceof Obstacle){//si la case courente est un obstacle, retourner faux
             return false;
@@ -79,20 +83,20 @@ public class Grille {
             voisins = getVoisins(current);//obtention des voisins de la case
 
             if((current = voisins[DROITE]) != null){//si case à droite éxiste
-
-                if (canGo(current, arrivé, Grille)) return true; // tenter un chemin, retourner vrai si chemin trouvé
+                //
+                if (canGo(current, arrivé)) return true; // tenter un chemin, retourner vrai si chemin trouvé
                 
             }if((current = voisins[GAUCHE]) != null){
 
-                if (canGo(current, arrivé, Grille)) return true;
+                if (canGo(current, arrivé)) return true;
 
             }if((current = voisins[HAUT]) != null){
                 
-                if (canGo(current, arrivé, Grille)) return true;
+                if (canGo(current, arrivé)) return true;
                 
             }if((current = voisins[BAS]) != null){
 
-                if (canGo(current, arrivé, Grille)) return true;
+                if (canGo(current, arrivé)) return true;
                 
             }
         }
@@ -111,8 +115,8 @@ public class Grille {
 
     voisins [DROITE] = this.getCase(x +1, y);
     voisins [GAUCHE] = this.getCase(x -1, y);
-    voisins [HAUT] = this.getCase(x, y +1);
-    voisins [BAS] = this.getCase(x, y -1);
+    voisins [HAUT] = this.getCase(x, y -1);
+    voisins [BAS] = this.getCase(x, y +1);
 
     return voisins;
     }
@@ -134,19 +138,20 @@ public class Grille {
      */
     public Case getCase(int x, int y)
     {	
-         if(x < Casegrille.length && y < Casegrille[x].length) 	{return Casegrille[x][y];}
+         if(x >= 0 && y >= 0 && x < Casegrille.length && y < Casegrille[x].length) 	{return Casegrille[x][y];}
  
          return null;
     }
 
     public char[][] toChar() {
-        char [largeur][hauteur] charTab;
-        for(Case [] x : this.Casegrille){
-            for(Case y : x){
+        char [][] charTab =  new char[this.largeur][this.hauteur];
+        for(int x = 0; x < this.largeur; x++){
+            for(int y = 0; y < this.hauteur; y++){
                 charTab[x][y] = this.Casegrille[x][y].toChar();
             }
         }
+        return charTab;
     }
 
-    return charTab;
+    
 }

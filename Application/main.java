@@ -20,7 +20,8 @@ public class main extends Application {
 	int[][] consoleGrille = new int[tailleGrille][tailleGrille];
 	Jeu Jeu;
 	public static void main(String[] args) {
-        // TEST CanGO
+        
+		// TEST CanGO
 		Grille testGrille = new Grille(6, 6);
 		char [][] charTestGrille = testGrille.toChar();
 		StringBuilder str = new StringBuilder();

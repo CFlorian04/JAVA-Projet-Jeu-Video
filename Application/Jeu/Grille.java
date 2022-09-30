@@ -13,7 +13,9 @@ public class Grille {
     final int HAUT = 3;
     int hauteur;
     int largeur;
+
     Case[][] Casegrille;
+    ArrayList<Case> historique = new ArrayList<Case>();
 
     public Grille(int tailleGrille){
         hauteur = tailleGrille;
@@ -45,21 +47,6 @@ public class Grille {
 				{
 					Casegrille[x][y] = new Case(x,y, new Bonus(0));
 				} else Casegrille[x][y] = new Case(x,y);
-                
-
-                /*
-                //'0' -> Vide / '1' -> Obstacle / '2' -> Bonus / '3' -> Joueur / '4' -> Maison
-                switch(consoleGrille[x][y])
-                {
-                    case 0 :    break;
-                    case 1 :    Casegrille[x][y].setCategorie(obstacle);
-                                break;
-                    case 2 :    Casegrille[x][y].setCategorie(bonus);
-                                break;
-                    case 3 :    break;
-                    case 4 :    break;
-                    default :   break;
-                }*/
 			}
 		}
    }
@@ -73,7 +60,7 @@ public class Grille {
     */
     public boolean canGo(Case current, Case arrivé) {
         Case[] voisins;
-        ArrayList<Case> historique = new ArrayList<Case>();
+        
 
         if(current.getCategorie() instanceof Obstacle){//si la case courente est un obstacle, retourner faux
             return false;
@@ -82,21 +69,11 @@ public class Grille {
         }else {
             voisins = getVoisins(current);//obtention des voisins de la case
 
-            if((current = voisins[DROITE]) != null){//si case à droite éxiste
-                //
+            if((current = voisins[DROITE]) != null && (this.checkHistorique(voisins[DROITE])) || (current = voisins[GAUCHE]) != null && (this.checkHistorique(voisins[GAUCHE]))
+            || (current = voisins[HAUT]) != null && (this.checkHistorique(voisins[HAUT])) || (current = voisins[BAS]) != null && (this.checkHistorique(voisins[BAS])))
+            {
+                this.addHistorique(current);
                 if (canGo(current, arrivé)) return true; // tenter un chemin, retourner vrai si chemin trouvé
-                
-            }if((current = voisins[GAUCHE]) != null){
-
-                if (canGo(current, arrivé)) return true;
-
-            }if((current = voisins[HAUT]) != null){
-                
-                if (canGo(current, arrivé)) return true;
-                
-            }if((current = voisins[BAS]) != null){
-
-                if (canGo(current, arrivé)) return true;
                 
             }
         }
@@ -153,5 +130,14 @@ public class Grille {
         return charTab;
     }
 
+    private boolean checkHistorique(Case current) {
+        for(Case h : historique){
+            if (h.compareTo(current) == 0)return false;
+        }
+        return true;
+    }
+    public void addHistorique(Case current) {
+        historique.add(current);
+    }
     
 }

@@ -1,4 +1,5 @@
 import CasesClasses.Case;
+import CasesClasses.Obstacle;
 import Jeu.Grille;
 import Jeu.Jeu;
 import javafx.application.Application;
@@ -22,7 +23,7 @@ public class main extends Application {
 	public static void main(String[] args) {
         
 		// TEST CanGO
-		Grille testGrille = new Grille(80, 80);
+		Grille testGrille = new Grille(5);
 		char [][] charTestGrille = testGrille.toChar();
 		StringBuilder str = new StringBuilder();
 		for(char [] l : charTestGrille){

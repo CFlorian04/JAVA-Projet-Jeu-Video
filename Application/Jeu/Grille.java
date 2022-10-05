@@ -46,6 +46,7 @@ public class Grille {
                 }
             }
 
+            
             for(int x = 0; x< largeur; x++)
             {
                 for(int y = 0; y< hauteur; y++)
@@ -67,7 +68,7 @@ public class Grille {
                     }
                 }
             }
-        }while (canGo(Casegrille[0][0], Casegrille[largeur-1][hauteur-1]));
+        }while (!canGo(Casegrille[0][0], Casegrille[largeur-1][hauteur-1]));
    }
 
    /**
@@ -83,7 +84,7 @@ public class Grille {
 
         if(current.getCategorie() instanceof Obstacle){//si la case courente est un obstacle, retourner faux
             return false;
-        }else if(current.voisin(arrivé)){//sinon si la case est à côté de l'arrivé retourner vrai
+        }else if(current.getPosX() == largeur-1 && current.getPosY() == hauteur-1){//sinon si la case est à côté de l'arrivé retourner vrai
             return true;
         }else {
             voisins = getVoisins(current);//obtention des voisins de la case

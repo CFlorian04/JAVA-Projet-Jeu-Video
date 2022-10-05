@@ -61,40 +61,40 @@ public class main extends Application {
 
       
       //Créer un rectangle et y associe un type de case pour chaque cases
-      for(int i = 0; i< jeu.getTailleGrille(); i++)
+      for(int x = 0; x< jeu.getTailleGrille(); x++)
       {
         
         for(int y = 0; y< jeu.getTailleGrille(); y++)
         {
 
-        System.out.print(grilleMain[i][y]);
-        Rectgrille[i][y] = createRectangle(50*i, 50*y, 25,25);
+        System.out.print(grilleMain[y][x]);
+        Rectgrille[x][y] = createRectangle(50*x, 50*y, 25,25);
 
-        switch (grilleMain[i][y])
+        switch (grilleMain[x][y])
         {
 
           case 'X' : //Case Obstacle  
-                      Rectgrille[i][y].setFill(Color.rgb(255,100,100));
+                      Rectgrille[x][y].setFill(Color.rgb(255,100,100));
                       break;
 
           case 'O' : //Case Bonus
-                      Rectgrille[i][y].setFill(Color.rgb(255, 255,100));
+                      Rectgrille[x][y].setFill(Color.rgb(255, 255,100));
                       break;
 
           case 'A' : //Case Joueur 
-                      Rectgrille[i][y].setFill(Color.rgb(100, 100,255));
+                      Rectgrille[x][y].setFill(Color.rgb(100, 100,255));
                       break;
 
           case 'M' : //Case Maison
-                      Rectgrille[i][y].setFill(Color.rgb(100, 255,255));
+                      Rectgrille[x][y].setFill(Color.rgb(100, 255,255));
                       break;
 
           case '_' : //Case Vide  
-                      Rectgrille[i][y].setFill(Color.rgb(100, 255,100));
+                      Rectgrille[x][y].setFill(Color.rgb(100, 255,100));
                       break;
         }          
           
-        root.add(Rectgrille[i][y],i,y);
+        root.add(Rectgrille[x][y],x,y);
          
         }
         System.out.println(" ");

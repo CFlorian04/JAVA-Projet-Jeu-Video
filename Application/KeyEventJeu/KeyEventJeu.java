@@ -1,4 +1,4 @@
-package KeyEvent;
+package KeyEventJeu;
 
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -6,13 +6,13 @@ import javafx.scene.input.KeyEvent;
 import Joueur.Joueur;
 import Grille.Grille;
 
-public class KeyEvent {
+public class KeyEventJeu {
 
     Scene sceneKeyEvent;
     Joueur joueurKeyEvent;
     Grille grilleKeyEvent;
 
-    public KeyEvent(Scene scene, Joueur joueur, Grille grille){
+    public KeyEventJeu(Scene scene, Joueur joueur, Grille grille){
         this.joueurKeyEvent = joueur;
         this.sceneKeyEvent = scene;
         this.grilleKeyEvent = grille;

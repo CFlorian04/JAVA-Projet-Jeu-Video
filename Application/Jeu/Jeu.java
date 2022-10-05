@@ -14,7 +14,7 @@ public class Jeu {
     Grille grilleJeu;
     Case caseJoueurJeu;
     Joueur joueurJeu;
-    KeyEventJeu keyEventJeu;
+    //KeyEventJeu keyEventJeu;
 
 
     public Jeu(Scene scene) {
@@ -22,7 +22,7 @@ public class Jeu {
         this.caseJoueurJeu = new Case(0,0);
         this.joueurJeu = new Joueur(enduranceJoueur,caseJoueurJeu);
         this.grilleJeu = new Grille(tailleGrille);
-        this.keyEventJeu = new KeyEventJeu(scene,joueurJeu,grilleJeu);
+        //this.keyEventJeu = new KeyEventJeu(scene,joueurJeu,grilleJeu);
 
     }
 

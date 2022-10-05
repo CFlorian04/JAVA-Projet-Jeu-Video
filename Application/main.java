@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import Jeu.Jeu;
+import KeyEventJeu.KeyEventTest;
 
 
 public class main extends Application {
@@ -50,6 +51,8 @@ public class main extends Application {
 		Stage.setMinHeight(hauteur);
 		Stage.setMinWidth(largeur);
 		Stage.show();
+
+    scene.setOnKeyPressed(new KeyEventTest());
    }
 
 

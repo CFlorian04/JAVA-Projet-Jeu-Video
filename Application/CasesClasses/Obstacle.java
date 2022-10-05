@@ -24,7 +24,9 @@ public class Obstacle extends Categorie {
                     break;
         }
 
-
+        
     }
-    
+    public char getCharType() {
+        return 'X';
+    }
 }

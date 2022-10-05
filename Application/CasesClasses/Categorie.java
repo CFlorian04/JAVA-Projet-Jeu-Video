@@ -31,7 +31,7 @@ public class Categorie
     }
 
     public char getCharType() {
-        return charType;
+        return '_';
     }
     
 }

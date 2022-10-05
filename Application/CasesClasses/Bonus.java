@@ -27,4 +27,7 @@ public class Bonus extends Categorie {
         }
     }
 
+    public char getCharType() {
+        return 'O';
+    }
 }

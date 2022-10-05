@@ -22,7 +22,7 @@ public class main extends Application {
 	public static void main(String[] args) {
         
 		// TEST CanGO
-		Grille testGrille = new Grille(6, 6);
+		Grille testGrille = new Grille(80, 80);
 		char [][] charTestGrille = testGrille.toChar();
 		StringBuilder str = new StringBuilder();
 		for(char [] l : charTestGrille){
@@ -33,7 +33,6 @@ public class main extends Application {
 			str.append('\n');
 		}
 		System.out.println(str);
-		System.out.print(testGrille.canGo(new Case(0, 0), new Case(5, 5)));
 
 		//launch(args);
     }

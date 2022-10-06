@@ -13,6 +13,13 @@ import javafx.stage.Stage;
 import Jeu.Jeu;
 import KeyEventJeu.KeyEventTest;
 
+
+/*
+ * https://jenkov.com/tutorials/javafx/index.html
+ * https://www.youtube.com/watch?v=gJYXctDSIl8
+ * https://riptutorial.com/javafx/example/19375/basic-javafx-project-using-fxml
+ */
+
 public class main extends Application {
 
   Scene scene;

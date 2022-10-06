@@ -4,8 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -34,26 +32,23 @@ public class main extends Application {
 
   public void start(Stage primaryStage) throws Exception {
 
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/test.fxml"));
+    /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/test.fxml"));
     Parent root = loader.load();
     Scene scene = new Scene(root);
+*/
+  
 
-    setScene(primaryStage, scene, "Don't Forget the Road", 800,600);
-
-    /*
-     * jeu = new Jeu(scene);
-     * grilleMain = jeu.getJeuChar();
-     * 
-     * GridPane layoutGrille = setGrille();
-     * layoutGrille.setPadding(new Insets(20));
-     * layoutGrille.setHgap(2);
-     * layoutGrille.setVgap(2);
-     * scene = new Scene(layoutGrille);
-     * 
-     * setScene(primaryStage, scene, "Don't Forget the Road",
-     * jeu.getTailleGrille()*30 + 200, jeu.getTailleGrille()*30 + 200);
-     */
-
+    
+     jeu = new Jeu(scene);
+     grilleMain = jeu.getJeuChar();
+     
+     GridPane layoutGrille = setGrille();
+     layoutGrille.setPadding(new Insets(20));
+     layoutGrille.setHgap(2);
+     layoutGrille.setVgap(2);
+     scene = new Scene(layoutGrille);
+     
+     setScene(primaryStage, scene, "Don't Forget the Road",jeu.getTailleGrille()*30 + 200, jeu.getTailleGrille()*30 + 200);
   }
 
   public void setScene(Stage Stage, Scene scene, String title, int hauteur, int largeur) {
@@ -67,7 +62,7 @@ public class main extends Application {
     Stage.setMinWidth(largeur);
     Stage.show();
 
-    //scene.setOnKeyPressed(new KeyEventTest());
+    scene.setOnKeyPressed(new KeyEventTest());
   }
 
   public GridPane setGrille() {

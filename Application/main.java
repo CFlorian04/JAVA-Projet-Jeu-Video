@@ -23,7 +23,7 @@ public class main extends Application {
 	public static void main(String[] args) {
         
 		// TEST CanGO
-		Grille testGrille = new Grille(5);
+		Grille testGrille = new Grille(10);
 		char [][] charTestGrille = testGrille.toChar();
 		StringBuilder str = new StringBuilder();
 		for(char [] l : charTestGrille){

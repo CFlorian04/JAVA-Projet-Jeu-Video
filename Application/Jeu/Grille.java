@@ -35,7 +35,23 @@ public class Grille {
     }
 
     private void initialiseCasegrille() {
-        
+        for(int x = 0; x< largeur; x++)
+        {
+            for(int y = 0; y< hauteur; y++)
+            {
+                Casegrille[x][y] = new Case(x,y);
+                
+            }
+        }
+
+        int randX = (int) (Math.random()*largeur-1);
+        int randY = (int) (Math.random()*hauteur-1);
+        Casegrille[randX][randY].setCategorie(new Obstacle(0));
+        if(!canGo(Casegrille[0][0], Casegrille[largeur-1][hauteur-1])){
+            Casegrille[randX][randY].setCategorie(null);
+        }
+
+/*
         do{
             for(int x = 0; x< largeur; x++)
             {
@@ -46,29 +62,33 @@ public class Grille {
                 }
             }
 
-            
-            for(int x = 0; x< largeur; x++)
-            {
-                for(int y = 0; y< hauteur; y++)
-                {
-                    
-                    if(!(x == 0 && y == 0 || x == largeur-1 && y == hauteur)){
-                        int rand = (int) (Math.random()*100);
+            int randX = (int) (Math.random()*largeur-1);
+            int randY = (int) (Math.random()*hauteur-1);
+            Casegrille[randX][randY].setCategorie(new Obstacle(0));
 
-                        System.out.println("x = " + x + " | y = " + y);
-                        if(rand > 70) //30% -> Obstacle
-                        {
-                            Casegrille[x][y].setCategorie(new Obstacle(0));
-                            historique.removeAll(historique);
-                        }
-                        else if(rand < 2) //2% -> Bonus
-                        {
-                            Casegrille[x][y].setCategorie(new Bonus(0));
-                        }
-                    }
-                }
-            }
+            // for(int x = 0; x< largeur; x++)
+            // {
+            //     for(int y = 0; y< hauteur; y++)
+            //     {
+                    
+            //         if(!(x == 0 && y == 0 || x == largeur-1 && y == hauteur)){
+            //             int rand = (int) (Math.random()*100);
+
+            //             System.out.println("x = " + x + " | y = " + y);
+            //             if(rand > 70) //30% -> Obstacle
+            //             {
+            //                 Casegrille[x][y].setCategorie(new Obstacle(0));
+            //                 historique.removeAll(historique);
+            //             }
+            //             else if(rand < 2) //2% -> Bonus
+            //             {
+            //                 Casegrille[x][y].setCategorie(new Bonus(0));
+            //             }
+            //         }
+            //     }
+            // }
         }while (!canGo(Casegrille[0][0], Casegrille[largeur-1][hauteur-1]));
+        */
    }
 
    /**
@@ -80,7 +100,7 @@ public class Grille {
     */
     public boolean canGo(Case current, Case arrivé) {
         Case[] voisins;
-        
+        historique.removeAll(historique);
 
         if(current.getCategorie() instanceof Obstacle){//si la case courente est un obstacle, retourner faux
             return false;

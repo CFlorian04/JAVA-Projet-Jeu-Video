@@ -18,6 +18,8 @@ import KeyEventJeu.KeyEventTest;
  * https://jenkov.com/tutorials/javafx/index.html
  * https://www.youtube.com/watch?v=gJYXctDSIl8
  * https://riptutorial.com/javafx/example/19375/basic-javafx-project-using-fxml
+ * https://github.com/callicoder/javafx-examples
+ * https://www.swtestacademy.com/javafx-tutorial/
  */
 
 public class main extends Application {

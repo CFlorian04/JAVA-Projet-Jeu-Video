@@ -51,6 +51,14 @@ public class main extends Application {
 
     setScene(primaryStage, scene, "Don't Forget the Road", jeu.getTailleGrille() * 30 + 200, jeu.getTailleGrille() * 30 + 200);
 
+
+    scene.setOnKeyPressed(e -> {
+      if(!jeu.isFini())
+      {
+        scene.setOnKeyPressed(keyEventJeu);
+      }
+    });
+
     scene.setOnKeyReleased(e -> {
       if (keyEventJeu.haschange()) {
         grilleMain = jeu.getJeuChar();
@@ -75,13 +83,6 @@ public class main extends Application {
     Stage.setMinHeight(hauteur);
     Stage.setMinWidth(largeur);
     Stage.show();
-
-    scene.setOnKeyPressed(e -> {
-      if(!jeu.isFini())
-      {
-        scene.setOnKeyPressed(keyEventJeu);
-      }
-    });
   }
 
   public GridPane setGrille() {

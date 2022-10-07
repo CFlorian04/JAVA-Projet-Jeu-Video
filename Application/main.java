@@ -49,8 +49,7 @@ public class main extends Application {
     scene = new Scene(layoutGrille);
     keyEventJeu = new KeyEventJeu(jeu);
 
-    setScene(primaryStage, scene, "Don't Forget the Road", jeu.getTailleGrille() * 30 + 200,
-        jeu.getTailleGrille() * 30 + 200);
+    setScene(primaryStage, scene, "Don't Forget the Road", jeu.getTailleGrille() * 30 + 200, jeu.getTailleGrille() * 30 + 200);
 
     scene.setOnKeyReleased(e -> {
       if (keyEventJeu.haschange()) {
@@ -82,12 +81,6 @@ public class main extends Application {
       {
         scene.setOnKeyPressed(keyEventJeu);
       }
-      else 
-      {
-        scene.setOnKeyPressed(null);
-      }
-      
-    
     });
   }
 

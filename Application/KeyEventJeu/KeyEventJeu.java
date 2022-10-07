@@ -1,9 +1,6 @@
 package KeyEventJeu;
 
-import javax.lang.model.util.ElementScanner6;
-
 import Jeu.Jeu;
-import Joueur.Joueur;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;

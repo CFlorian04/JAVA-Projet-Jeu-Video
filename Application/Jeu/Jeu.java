@@ -76,7 +76,7 @@ public class Jeu {
                     changeY = 1;
                     break;
             }
-            if (joueurCoordX + changeX > 0 && joueurCoordX + changeX < tailleGrille && joueurCoordY + changeY > 0&& joueurCoordY + changeY < tailleGrille) {
+            if (joueurCoordX + changeX > 0 && joueurCoordX + changeX < tailleGrille && joueurCoordY + changeY > 0 && joueurCoordY + changeY < tailleGrille) {
 
                 if (!(grilleJeu.getCase(joueurCoordX + changeX, joueurCoordY + changeY).getCategorie() instanceof Obstacle)) {
                     joueurJeu.Déplacer(joueurCoordX + changeX, joueurCoordY + changeY);

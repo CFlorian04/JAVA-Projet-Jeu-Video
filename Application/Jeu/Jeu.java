@@ -16,6 +16,7 @@ public class Jeu {
     Grille grilleJeu;
     Case caseJoueurJeu;
     Joueur joueurJeu;
+    Case arrivéeCase = new Case(tailleGrille-1, tailleGrille-1);
 
     public Jeu(Scene scene) {
         this.sceneJeu = scene;
@@ -32,7 +33,7 @@ public class Jeu {
     public char[][] getJeuChar() {
         char[][] grilleFinal = grilleJeu.toChar();
         grilleFinal[joueurJeu.getJoueurCaseOccupee().getPosX()][joueurJeu.getJoueurCaseOccupee().getPosY()] = 'A';
-        grilleFinal[tailleGrille - 1][tailleGrille - 1] = 'M';
+        grilleFinal[arrivéeCase.getPosX()][arrivéeCase.getPosY()] = 'M';
 
         return grilleFinal;
     }
@@ -96,8 +97,7 @@ public class Jeu {
             System.out.println("Perdu");
         }
 
-        if (joueurJeu.getJoueurCaseOccupee().getPosX() == grilleJeu.getTailleGrille()
-                && joueurJeu.getJoueurCaseOccupee().getPosY() == grilleJeu.getTailleGrille()) {
+        if (joueurJeu.getJoueurCaseOccupee().compareTo(arrivéeCase) == 0) {
             jeuFini = true;
             System.out.println("Gagné");
         }

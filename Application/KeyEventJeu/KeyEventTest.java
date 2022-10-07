@@ -16,16 +16,16 @@ public class KeyEventTest implements EventHandler<KeyEvent> {
         int joueurCoordX = joueurKeyEvent.getJoueurCaseOccupee().getCaseCoordX();
         int joueurCoordY = joueurKeyEvent.getJoueurCaseOccupee().getCaseCoordY();
 
-        if (key == "q") {
+        if (key == KeyCode.LEFT) {
             System.out.println("Fleche Gauche");
             joueurKeyEvent.Déplacer(joueurCoordX - 1, joueurCoordY);
-        } else if (key == "d") {
+        } else if (key ==KeyCode.RIGHT) {
             System.out.println("Fleche Droite");
             joueurKeyEvent.Déplacer(joueurCoordX - 1, joueurCoordY);
-        } else if (key == "z") {
+        } else if (key ==KeyCode.UP) {
             System.out.println("Fleche Haut");
             joueurKeyEvent.Déplacer(joueurCoordX - 1, joueurCoordY);
-        } else if (key == "s") {
+        } else if (key ==KeyCode.DOWN) {
             joueurKeyEvent.Déplacer(joueurCoordX - 1, joueurCoordY);
             System.out.println("Fleche Bas");
         }

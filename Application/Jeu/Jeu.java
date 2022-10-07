@@ -3,7 +3,6 @@ package Jeu;
 import javafx.scene.Scene;
 import Grille.Grille;
 import Joueur.Joueur;
-import KeyEventJeu.KeyEventJeu;
 import Case.Bonus;
 import Case.Case;
 import Case.Obstacle;

@@ -24,6 +24,8 @@ public class Jeu {
         this.joueurJeu = new Joueur(enduranceJoueur, caseJoueurJeu);
         this.grilleJeu = new Grille(tailleGrille);
 
+        this.ShowGrille();
+
     }
 
     public int getTailleGrille() {
@@ -59,8 +61,10 @@ public class Jeu {
     public void moveJoueurJeu(char key) {
         int joueurCoordX = joueurJeu.getJoueurCaseOccupee().getPosX();
         int joueurCoordY = joueurJeu.getJoueurCaseOccupee().getPosY();
+        System.out.println("\033[H\033[2J");
+        System.out.flush();
+        System.out.println("#######################");
         if (joueurJeu.getJoueurEndurance() > 0) {
-
             int changeX = 0;
             int changeY = 0;
             switch (key) {

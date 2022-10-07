@@ -43,7 +43,15 @@ public class Joueur {
 
     public void modifEndurance(int change)
     {
-        this.joueurEndurance += change;
+        if(this.joueurEndurance > 10)
+        {
+            this.joueurEndurance += change;
+        }
+        else 
+        {
+            this.joueurEndurance = 0;
+        }
+
     }
 
 }

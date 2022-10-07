@@ -52,8 +52,7 @@ public class Jeu {
         }
     }
 
-    public boolean isFini()
-    {
+    public boolean isFini() {
         return jeuFini;
     }
 
@@ -78,24 +77,26 @@ public class Jeu {
                     changeY = 1;
                     break;
             }
+            if (joueurCoordX + changeX > 0 && joueurCoordX + changeX < tailleGrille && joueurCoordY + changeY > 0&& joueurCoordY + changeY < tailleGrille) {
 
-            if (!(grilleJeu.getCase(joueurCoordX + changeX, joueurCoordY + changeY).getCategorie() instanceof Obstacle)) {
-                joueurJeu.Déplacer(joueurCoordX + changeX, joueurCoordY + changeY);
-                if ((grilleJeu.getCase(joueurCoordX + changeX, joueurCoordY + changeY).getCategorie() instanceof Bonus)) {
-                    joueurJeu.modifEndurance(10);
-                    grilleJeu.setCase(new Case(joueurCoordX, joueurCoordY));
-                    grilleJeu.getCase(joueurCoordX, joueurCoordY).setCategorie(null);
+                if (!(grilleJeu.getCase(joueurCoordX + changeX, joueurCoordY + changeY).getCategorie() instanceof Obstacle)) {
+                    joueurJeu.Déplacer(joueurCoordX + changeX, joueurCoordY + changeY);
+                    if ((grilleJeu.getCase(joueurCoordX + changeX, joueurCoordY + changeY).getCategorie() instanceof Bonus)) {
+                        joueurJeu.modifEndurance(10);
+                        grilleJeu.setCase(new Case(joueurCoordX, joueurCoordY));
+                        grilleJeu.getCase(joueurCoordX, joueurCoordY).setCategorie(null);
+                    }
+                } else {
+                    joueurJeu.modifEndurance(-10);
                 }
-            } else {
-                joueurJeu.modifEndurance(-10);
             }
         } else {
             jeuFini = true;
             System.out.println("Perdu");
         }
 
-        if(joueurJeu.getJoueurCaseOccupee().getPosX() == grilleJeu.getTailleGrille() && joueurJeu.getJoueurCaseOccupee().getPosY() == grilleJeu.getTailleGrille())
-        {
+        if (joueurJeu.getJoueurCaseOccupee().getPosX() == grilleJeu.getTailleGrille()
+                && joueurJeu.getJoueurCaseOccupee().getPosY() == grilleJeu.getTailleGrille()) {
             jeuFini = true;
             System.out.println("Gagné");
         }

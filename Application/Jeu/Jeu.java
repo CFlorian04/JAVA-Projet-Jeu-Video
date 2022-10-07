@@ -94,7 +94,7 @@ public class Jeu {
             System.out.println("Perdu");
         }
 
-        if(joueurJeu.getJoueurCaseOccupee().getPosX() == grilleJeu.getTailleGrille() -1 && joueurJeu.getJoueurCaseOccupee().getPosY() == grilleJeu.getTailleGrille() -1)
+        if(joueurJeu.getJoueurCaseOccupee().getPosX() == grilleJeu.getTailleGrille() && joueurJeu.getJoueurCaseOccupee().getPosY() == grilleJeu.getTailleGrille())
         {
             jeuFini = true;
             System.out.println("Gagné");

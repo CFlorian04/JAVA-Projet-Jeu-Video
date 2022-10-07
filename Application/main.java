@@ -1,13 +1,14 @@
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import Jeu.Jeu;
 import KeyEventJeu.KeyEventJeu;
-
 
 /*
  * https://jenkov.com/tutorials/javafx/index.html
@@ -23,40 +24,46 @@ public class main extends Application {
   Jeu jeu;
   char[][] grilleMain;
   KeyEventJeu keyEventJeu;
+  GridPane layoutGrille;
 
   public static void main(String[] args) {
     launch(args);
-    
+
   }
 
   public void start(Stage primaryStage) throws Exception {
 
-    /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/test.fxml"));
-    Parent root = loader.load();
-    Scene scene = new Scene(root);
-*/
-  
+    /*
+     * FXMLLoader loader = new FXMLLoader(getClass().getResource("/test.fxml"));
+     * Parent root = loader.load();
+     * Scene scene = new Scene(root);
+     */
 
-    
-     jeu = new Jeu(scene);
-     grilleMain = jeu.getJeuChar();
-     
-     GridPane layoutGrille = setGrille();
-     layoutGrille.setPadding(new Insets(20));
-     layoutGrille.setHgap(2);
-     layoutGrille.setVgap(2);
-     scene = new Scene(layoutGrille);
-     keyEventJeu = new KeyEventJeu(jeu);
-     
-     setScene(primaryStage, scene, "Don't Forget the Road",jeu.getTailleGrille()*30 + 200, jeu.getTailleGrille()*30 + 200);
+    jeu = new Jeu(scene);
+    grilleMain = jeu.getJeuChar();
 
+    layoutGrille = setGrille();
+    layoutGrille.setPadding(new Insets(20));
+    layoutGrille.setHgap(2);
+    layoutGrille.setVgap(2);
+    scene = new Scene(layoutGrille);
+    keyEventJeu = new KeyEventJeu(jeu);
 
-     if(keyEventJeu.haschange())
-     {
-      System.out.println("change");
-      scene = new Scene(layoutGrille);
-      setScene(primaryStage, scene, "Don't Forget the Road",jeu.getTailleGrille()*30 + 200, jeu.getTailleGrille()*30 + 200);
-     }
+    setScene(primaryStage, scene, "Don't Forget the Road", jeu.getTailleGrille() * 30 + 200,
+        jeu.getTailleGrille() * 30 + 200);
+
+    scene.setOnKeyReleased(e -> {
+      if (keyEventJeu.haschange()) {
+        grilleMain = jeu.getJeuChar();
+        layoutGrille = setGrille();
+        layoutGrille.setPadding(new Insets(20));
+        layoutGrille.setHgap(2);
+        layoutGrille.setVgap(2);
+        scene.setRoot(layoutGrille);
+        primaryStage.setScene(scene);
+      }
+    });
+
   }
 
   public void setScene(Stage Stage, Scene scene, String title, int hauteur, int largeur) {
@@ -70,8 +77,18 @@ public class main extends Application {
     Stage.setMinWidth(largeur);
     Stage.show();
 
-    scene.setOnKeyPressed(keyEventJeu);
-    scene.setOnKeyPressed(null);
+    scene.setOnKeyPressed(e -> {
+      if(!jeu.isFini())
+      {
+        scene.setOnKeyPressed(keyEventJeu);
+      }
+      else 
+      {
+        scene.setOnKeyPressed(null);
+      }
+      
+    
+    });
   }
 
   public GridPane setGrille() {
@@ -84,7 +101,6 @@ public class main extends Application {
 
       for (int y = 0; y < jeu.getTailleGrille(); y++) {
 
-        System.out.print(grilleMain[y][x]);
         Rectgrille[x][y] = createRectangle(50 * x, 50 * y, 25, 25);
 
         switch (grilleMain[x][y]) {
@@ -113,7 +129,6 @@ public class main extends Application {
         root.add(Rectgrille[x][y], x, y);
 
       }
-      System.out.println(" ");
     }
 
     // Renvoi le layout de la grille

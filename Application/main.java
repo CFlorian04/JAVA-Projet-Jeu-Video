@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import Jeu.Jeu;
-import KeyEventJeu.KeyEventTest;
+import KeyEventJeu.KeyEventJeu;
 
 
 /*
@@ -62,7 +62,7 @@ public class main extends Application {
     Stage.setMinWidth(largeur);
     Stage.show();
 
-    scene.setOnKeyPressed(new KeyEventTest());
+    scene.setOnKeyPressed(new KeyEventJeu(jeu));
   }
 
   public GridPane setGrille() {

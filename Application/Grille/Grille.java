@@ -13,6 +13,10 @@ public class Grille {
     final int HAUT = 3;
     int hauteur;
     int largeur;
+
+    int depCaseX = 0;//case de départ toujours 0 0, case d'arrivée toujours en bas à droite
+    int depCaseY = 0;
+
     Case[][] Casegrille;
 
     public Grille(int tailleGrille){
@@ -22,7 +26,7 @@ public class Grille {
         initialiseCasegrille();
     }
 
-    public Grille(int hauteur, int largeur) {
+    public Grille(int largeur, int hauteur) {
         this.hauteur = hauteur;
         this.largeur = largeur;
         Casegrille = new Case[largeur][hauteur];// peut être inversé, à tester
@@ -30,27 +34,37 @@ public class Grille {
     }
 
     private void initialiseCasegrille() {
-		for(int x = 0; x< largeur; x++)
-		{
-			for(int y = 0; y< hauteur; y++)
-			{
-                int rand = (int) (Math.random()*100);
-				
-
-                if(rand > 70) //30% -> Obstacle
-				{
-                    Casegrille[x][y] = new Case(x,y, new Obstacle(0,0,"") );
-				}
-				else if(rand < 2) //2% -> Bonus
-				{
-					Casegrille[x][y] = new Case(x,y, new Bonus(0,0,""));
-				} else Casegrille[x][y] = new Case(x,y);
+        for(int x = 0; x< largeur; x++)
+        {
+            for(int y = 0; y< hauteur; y++)
+            {
+                Casegrille[x][y] = new Case(x,y);
                 
-			}
-		}
-        Casegrille[0][0].setCaseCategorie(null);
-        Casegrille[largeur-1][hauteur-1].setCaseCategorie(null);
+            }
+        }
 
+        int randX;
+        int randY;
+        boolean change;
+        do{
+            randX = (int) Math.floor(Math.random()*(largeur));
+            randY = (int) Math.floor(Math.random()*(hauteur));
+
+            change = false;
+            
+            if(!(randX == 0 && randY == 0 || randX == largeur-1 && randY == hauteur-1)){
+                change = true;
+                int randCase = (int) Math.floor(Math.random()*100);
+                if(randCase>10)Casegrille[randX][randY].setCategorie(new Obstacle(0,-10,""));
+                else Casegrille[randX][randY].setCategorie(new Bonus(0,10,""));
+            }
+
+            // Casegrille[0][0].setCategorie(null);
+            // Casegrille[largeur-1][hauteur-1].setCategorie(null);
+
+            //System.out.println("x = " + randX + "; y = " + randY);
+        }while(!change || canGo(Casegrille[0][0], Casegrille[largeur-1][hauteur-1], new ArrayList<Case>()));
+        Casegrille[randX][randY].setCategorie(null);
    }
 
    /**
@@ -60,33 +74,23 @@ public class Grille {
     * @param Grille grille du jeu
     * @return vrai si chemin possible
     */
-    public boolean canGo(Case current, Case arrivé) {
+    public boolean canGo(Case current, Case arrivé, ArrayList<Case> historique) {
         Case[] voisins;
-        ArrayList<Case> historique = new ArrayList<Case>();
 
-        if(current.getCaseCategorie() instanceof Obstacle){//si la case courente est un obstacle, retourner faux
+        historique.add(current);
+
+        if(current.getCategorie() instanceof Obstacle){//si la case courente est un obstacle, retourner faux
             return false;
-        }else if(current.voisin(arrivé)){//sinon si la case est à côté de l'arrivé retourner vrai
+        }else if(current.compareTo(arrivé) == 0){//sinon si la case est l'arrivée retourner vrai
             return true;
         }else {
             voisins = getVoisins(current);//obtention des voisins de la case
-
-            if((current = voisins[DROITE]) != null){//si case à droite éxiste
-                //
-                if (canGo(current, arrivé)) return true; // tenter un chemin, retourner vrai si chemin trouvé
-                
-            }if((current = voisins[GAUCHE]) != null){
-
-                if (canGo(current, arrivé)) return true;
-
-            }if((current = voisins[HAUT]) != null){
-                
-                if (canGo(current, arrivé)) return true;
-                
-            }if((current = voisins[BAS]) != null){
-
-                if (canGo(current, arrivé)) return true;
-                
+            
+            for (Case nextCase : voisins){
+                if(nextCase != null && !historique.contains(nextCase)){
+                    if(canGo(nextCase, arrivé, historique))return true;
+                    
+                }
             }
         }
         return false;
@@ -99,8 +103,8 @@ public class Grille {
     */
    public Case[] getVoisins (Case c) {
     Case[] voisins = new Case[4];
-    int x = c.getCaseCoordX();
-    int y = c.getCaseCoordY();
+    int x = c.getPosX();
+    int y = c.getPosY();
 
     voisins [DROITE] = this.getCase(x +1, y);
     voisins [GAUCHE] = this.getCase(x -1, y);
@@ -141,4 +145,23 @@ public class Grille {
         }
         return charTab;
     }
+
+    // /**
+    //  * Retourne faux si déjà enregistré
+    //  * @param current case à tester
+    //  * @return vrai si absente d'historique
+    //  */
+    // private boolean checkHistorique(Case current) {
+    //     for(Case h : historique){
+    //         if (h.compareTo(current) == 0)return false;
+    //     }
+    //     return true;
+    // }
+    // public void addHistorique(Case current) {
+    //     historique.add(current);
+    // }
+    // public void resetHistorique(){
+    //     historique.removeAll(historique);
+    // }
+
 }

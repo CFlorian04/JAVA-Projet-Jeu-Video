@@ -1,67 +1,75 @@
 package Case;
 
-public class Case {
 
-    private int caseCoordX;
-    private int caseCoordY;
-    private Categorie caseCategorie;
+public class Case implements Comparable{
 
-    
-    public Case(int caseCoordX, int caseCoordY) {
-        this.caseCoordX = caseCoordX;
-        this.caseCoordY = caseCoordY;
+    private int posX;
+    private int posY;
+    private Categorie categorie;
+
+    public Case(int posX, int posY) {
+        this.posX = posX;
+        this.posY = posY;
     }
 
-
-    public Case(int caseCoordX, int caseCoordY, Categorie caseCategorie) {
-        this.caseCoordX = caseCoordX;
-        this.caseCoordY = caseCoordY;
-        this.caseCategorie = caseCategorie;
+    public Case(int posX, int posY, Categorie categorie) {
+        this.posX = posX;
+        this.posY = posY;
+        this.categorie = categorie;
     }
 
-
-    public int getCaseCoordX() {
-        return caseCoordX;
-    }
-
-
-    public void setCaseCoordX(int caseCoordX) {
-        this.caseCoordX = caseCoordX;
-    }
-
-
-    public int getCaseCoordY() {
-        return caseCoordY;
-    }
-
-
-    public void setCaseCoordY(int caseCoordY) {
-        this.caseCoordY = caseCoordY;
-    }
-
-
-    public Categorie getCaseCategorie() {
-        return caseCategorie;
-    }
-
-
-    public void setCaseCategorie(Categorie caseCategorie) {
-        this.caseCategorie = caseCategorie;
-    }
-
+    /**
+     * Test si c est un voisin
+     * @param c case à tester
+     * @return vrai si c est un voisin
+     */
     public boolean voisin(Case c){
-        if(((c.getCaseCoordX() + 1 == this.caseCoordX || c.getCaseCoordX() -1 == this.caseCoordX + 1) && c.getCaseCoordY() == this.caseCoordY) || 
-            ((c.getCaseCoordY() + 1 == this.caseCoordY || c.getCaseCoordY() -1 == this.caseCoordY + 1) && c.getCaseCoordX() == this.caseCoordX)){
+        if(((c.getPosX() + 1 == this.posX || c.getPosX() -1 == this.posX + 1) && c.getPosY() == this.posY) || 
+            ((c.getPosY() + 1 == this.posY || c.getPosY() -1 == this.posY + 1) && c.getPosX() == this.posX)){
                 return true; // c est un voisin
-        }
-        else return false;// c n'est pas voisin
+        }else return false;// c n'est pas voisin
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public Categorie getCategorie()
+    {
+        return categorie;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
     }
 
     public char toChar() {
-        if (this.caseCategorie!= null){
-            return this.getCaseCategorie().getCharType();
-        } else return '_';
+        if (this.categorie!= null){
+            return this.getCategorie().getCharType();
+        } else return '_';//si case vide retourner _
     }
-    
+
+    @Override
+    public int compareTo(Object o) {
+        // TODO Auto-generated method stub
+        Case compare = (Case) o;
+        int selfPoint = this.posX + this.posY;
+        int comparePoint = compare.getPosX() + compare.getPosY();
+        if(selfPoint > comparePoint) return 1;
+        else if (selfPoint < comparePoint) return -1;
+        else return 0;
+    }
     
 }

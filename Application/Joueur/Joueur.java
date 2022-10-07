@@ -33,8 +33,8 @@ public class Joueur {
     {
         if(joueurEndurance > 0)
         {
-            joueurCaseOccupee.setCaseCoordX(caseCoordX);
-            joueurCaseOccupee.setCaseCoordY(caseCoordY);
+            joueurCaseOccupee.setPosX(caseCoordX);
+            joueurCaseOccupee.setPosY(caseCoordY);
             this.joueurEndurance -= 1;
             return true;
         }

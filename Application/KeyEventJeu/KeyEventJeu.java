@@ -1,56 +1,39 @@
 package KeyEventJeu;
 
-import javafx.scene.Scene;
+import Jeu.Jeu;
+import Joueur.Joueur;
+import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import Joueur.Joueur;
-import Grille.Grille;
 
-public class KeyEventJeu {
+public class KeyEventJeu implements EventHandler<KeyEvent> {
+    Jeu jeu;
 
-    Scene sceneKeyEvent;
-    Joueur joueurKeyEvent;
-    Grille grilleKeyEvent;
-
-    public KeyEventJeu(Scene scene, Joueur joueur, Grille grille){
-        this.joueurKeyEvent = joueur;
-        this.sceneKeyEvent = scene;
-        this.grilleKeyEvent = grille;
-        SceneAddKeyEvent(sceneKeyEvent);
+    public KeyEventJeu(Jeu jeu) {
+        super();
+        this.jeu = jeu;
+        System.out.println(jeu.getTailleGrille());
     }
 
-    public void SceneAddKeyEvent(Scene sceneKeyEvent){
-
-        sceneKeyEvent.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
-			int joueurCoordX = joueurKeyEvent.getJoueurCaseOccupee().getCaseCoordX();
-            int joueurCoordY = joueurKeyEvent.getJoueurCaseOccupee().getCaseCoordY();
-
-			if(event.getCode() == KeyCode.LEFT)
-			{
-				System.out.println("Fleche Gauche");
-                if(true )
-                {
-                    joueurKeyEvent.Déplacer(joueurCoordX-1,joueurCoordY);
-                }
-
-			}
-			else if(event.getCode() == KeyCode.RIGHT)
-			{
-				System.out.println("Fleche Droite");
-                joueurKeyEvent.Déplacer(joueurCoordX-1,joueurCoordY);
-			}
-			else if(event.getCode() == KeyCode.UP)
-			{
-				System.out.println("Fleche Haut");
-                joueurKeyEvent.Déplacer(joueurCoordX-1,joueurCoordY);
-			}
-			else if(event.getCode() == KeyCode.DOWN)
-			{
-                joueurKeyEvent.Déplacer(joueurCoordX-1,joueurCoordY);
-				System.out.println("Fleche Bas");
-			}
-		});
+    public void setJeu(Jeu jeu) {
+        this.jeu = jeu;
     }
-    
-    
+
+    @Override
+    public void handle(KeyEvent event) {
+        KeyCode key = event.getCode();
+        Joueur joueurKeyEvent = new Joueur(10, null);
+
+        if (key == KeyCode.LEFT) {
+            jeu.moveJoueurJeu('g');
+        } else if (key == KeyCode.RIGHT) {
+            jeu.moveJoueurJeu('d');
+        } else if (key == KeyCode.UP) {
+            jeu.moveJoueurJeu('h');
+        } else if (key == KeyCode.DOWN) {
+            jeu.moveJoueurJeu('b');
+        }
+
+    }
+
 }

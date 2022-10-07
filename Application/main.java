@@ -26,6 +26,7 @@ public class main extends Application {
 
   public static void main(String[] args) {
     launch(args);
+    
   }
 
   public void start(Stage primaryStage) throws Exception {
@@ -70,6 +71,7 @@ public class main extends Application {
     Stage.show();
 
     scene.setOnKeyPressed(keyEventJeu);
+    scene.setOnKeyPressed(null);
   }
 
   public GridPane setGrille() {

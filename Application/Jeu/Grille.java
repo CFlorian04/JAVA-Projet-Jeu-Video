@@ -52,7 +52,7 @@ public class Grille {
 
             change = false;
             
-            if(!(randX == 0 && randY == 0 || randX == largeur-1 && randY == hauteur-1)){
+            if(!(randX == 0 && randY == 0 || randX == largeur-1 && randY == hauteur-1 || Casegrille[randX][randY].getCategorie() != null)){
                 change = true;
                 int randCase = (int) Math.floor(Math.random()*100);
                 if(randCase>15)Casegrille[randX][randY].setCategorie(new Obstacle(0));

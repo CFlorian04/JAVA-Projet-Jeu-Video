@@ -54,7 +54,7 @@ public class Jeu {
         }
     }
 
-    public boolean isFini() {
+    public boolean isFinish() {
         return jeuFini;
     }
 

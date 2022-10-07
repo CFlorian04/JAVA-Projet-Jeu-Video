@@ -53,7 +53,7 @@ public class main extends Application {
 
 
     scene.setOnKeyPressed(e -> {
-      if(!jeu.isFini())
+      if(!jeu.isFinish())
       {
         scene.setOnKeyPressed(keyEventJeu);
       }

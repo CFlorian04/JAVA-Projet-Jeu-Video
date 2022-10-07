@@ -45,19 +45,25 @@ public class Grille {
 
         int randX;
         int randY;
+        boolean change;
         do{
             randX = (int) Math.floor(Math.random()*(largeur));
             randY = (int) Math.floor(Math.random()*(hauteur));
+
+            change = false;
             
-            if(randX == 0 && randY == 0 || randX == largeur-1 && randY == hauteur-1)
+            if(!(randX == 0 && randY == 0 || randX == largeur-1 && randY == hauteur-1)){
+                change = true;
+                int randCase = (int) Math.floor(Math.random()*100);
+                if(randCase>15)Casegrille[randX][randY].setCategorie(new Obstacle(0));
+                else Casegrille[randX][randY].setCategorie(new Bonus(0));
+            }
 
-            Casegrille[randX][randY].setCategorie(new Obstacle(0));
-
-            Casegrille[0][0].setCategorie(null);
-            Casegrille[largeur-1][hauteur-1].setCategorie(null);
+            // Casegrille[0][0].setCategorie(null);
+            // Casegrille[largeur-1][hauteur-1].setCategorie(null);
 
             System.out.println("x = " + randX + "; y = " + randY);
-        }while(canGo(Casegrille[0][0], Casegrille[largeur-1][hauteur-1], new ArrayList<Case>()));
+        }while(!change || canGo(Casegrille[0][0], Casegrille[largeur-1][hauteur-1], new ArrayList<Case>()));
         Casegrille[randX][randY].setCategorie(null);
    }
 

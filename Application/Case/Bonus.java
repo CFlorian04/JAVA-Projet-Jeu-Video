@@ -5,7 +5,7 @@ public class Bonus extends Categorie {
     int bonusType;
 
     public Bonus(int bonusType, int modifEndurance, String image) {
-        super('O',modifEndurance,image);
+        super('O',10,image);
         this.bonusType = bonusType;
 
         //En fonction du type de bonus choisi

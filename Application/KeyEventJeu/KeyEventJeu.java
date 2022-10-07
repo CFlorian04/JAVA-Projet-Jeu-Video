@@ -1,5 +1,7 @@
 package KeyEventJeu;
 
+import javax.lang.model.util.ElementScanner6;
+
 import Jeu.Jeu;
 import Joueur.Joueur;
 import javafx.event.EventHandler;
@@ -8,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 
 public class KeyEventJeu implements EventHandler<KeyEvent> {
     Jeu jeu;
+    boolean change = false;
 
     public KeyEventJeu(Jeu jeu) {
         super();
@@ -22,18 +25,34 @@ public class KeyEventJeu implements EventHandler<KeyEvent> {
     @Override
     public void handle(KeyEvent event) {
         KeyCode key = event.getCode();
-        Joueur joueurKeyEvent = new Joueur(10, null);
 
         if (key == KeyCode.LEFT) {
             jeu.moveJoueurJeu('g');
+            change = true;
         } else if (key == KeyCode.RIGHT) {
             jeu.moveJoueurJeu('d');
+            change = true;
         } else if (key == KeyCode.UP) {
             jeu.moveJoueurJeu('h');
+            change = true;
         } else if (key == KeyCode.DOWN) {
             jeu.moveJoueurJeu('b');
+            change = true;
+        }
+        else {
+            change = false;
         }
 
+    }
+
+    public boolean haschange()
+    {
+        if(change)
+        {
+            change = false;
+            return true;
+        }
+        return false;
     }
 
 }

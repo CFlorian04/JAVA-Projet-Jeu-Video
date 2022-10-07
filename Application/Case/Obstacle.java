@@ -5,7 +5,7 @@ public class Obstacle extends Categorie {
     int obstacleType;
 
     public Obstacle(int obstacleType, int modifEndurance, String image) {
-        super('X',modifEndurance,image);
+        super('X',-10,image);
         this.obstacleType = obstacleType;
 
          //En fonction du type d'obstacle choisi

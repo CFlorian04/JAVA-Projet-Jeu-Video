@@ -136,6 +136,12 @@ public class Grille {
          return null;
     }
 
+    public void setCase(Case newCase)
+    {	
+         Casegrille[newCase.getPosX()][newCase.getPosY()] = newCase;
+    }
+
+
     public char[][] toChar() {
         char [][] charTab =  new char[this.largeur][this.hauteur];
         for(int x = 0; x < this.largeur; x++){

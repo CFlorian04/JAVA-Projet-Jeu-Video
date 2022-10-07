@@ -25,6 +25,7 @@ public class main extends Application {
   Scene scene;
   Jeu jeu;
   char[][] grilleMain;
+  KeyEventJeu keyEventJeu;
 
   public static void main(String[] args) {
     launch(args);
@@ -47,8 +48,17 @@ public class main extends Application {
      layoutGrille.setHgap(2);
      layoutGrille.setVgap(2);
      scene = new Scene(layoutGrille);
+     keyEventJeu = new KeyEventJeu(jeu);
      
      setScene(primaryStage, scene, "Don't Forget the Road",jeu.getTailleGrille()*30 + 200, jeu.getTailleGrille()*30 + 200);
+
+
+     if(keyEventJeu.haschange())
+     {
+      System.out.println("change");
+      scene = new Scene(layoutGrille);
+      setScene(primaryStage, scene, "Don't Forget the Road",jeu.getTailleGrille()*30 + 200, jeu.getTailleGrille()*30 + 200);
+     }
   }
 
   public void setScene(Stage Stage, Scene scene, String title, int hauteur, int largeur) {
@@ -62,7 +72,7 @@ public class main extends Application {
     Stage.setMinWidth(largeur);
     Stage.show();
 
-    scene.setOnKeyPressed(new KeyEventJeu(jeu));
+    scene.setOnKeyPressed(keyEventJeu);
   }
 
   public GridPane setGrille() {

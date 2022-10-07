@@ -41,4 +41,9 @@ public class Joueur {
         return false;
     }
 
+    public void modifEndurance(int change)
+    {
+        this.joueurEndurance += change;
+    }
+
 }

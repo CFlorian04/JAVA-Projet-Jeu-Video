@@ -3,12 +3,14 @@ package Jeu;
 import javafx.scene.Scene;
 import Grille.Grille;
 import Joueur.Joueur;
+import KeyEventJeu.KeyEventJeu;
 import Case.Bonus;
 import Case.Case;
 import Case.Obstacle;
 
 public class Jeu {
 
+    boolean jeuFini = false;
     int tailleGrille = 10;
     int enduranceJoueur = 25;
     Scene sceneJeu;
@@ -50,6 +52,11 @@ public class Jeu {
         }
     }
 
+    public boolean isFini()
+    {
+        return jeuFini;
+    }
+
     public void moveJoueurJeu(char key) {
         int joueurCoordX = joueurJeu.getJoueurCaseOccupee().getPosX();
         int joueurCoordY = joueurJeu.getJoueurCaseOccupee().getPosY();
@@ -74,22 +81,23 @@ public class Jeu {
 
             if (!(grilleJeu.getCase(joueurCoordX + changeX, joueurCoordY + changeY).getCategorie() instanceof Obstacle)) {
                 joueurJeu.Déplacer(joueurCoordX + changeX, joueurCoordY + changeY);
-                if ((grilleJeu.getCase(joueurCoordX + changeX, joueurCoordY + changeY).getCategorie() instanceof Bonus))
-                {
+                if ((grilleJeu.getCase(joueurCoordX + changeX, joueurCoordY + changeY).getCategorie() instanceof Bonus)) {
                     joueurJeu.modifEndurance(10);
                     grilleJeu.setCase(new Case(joueurCoordX, joueurCoordY));
                     grilleJeu.getCase(joueurCoordX, joueurCoordY).setCategorie(null);
                 }
-            }
-            else
-            {
+            } else {
                 joueurJeu.modifEndurance(-10);
             }
-
-            // System.out.println( joueurJeu.getJoueurCaseOccupee().getPosX() + " / " +
-            // joueurJeu.getJoueurCaseOccupee().getPosY());
         } else {
-            System.out.println("Plus endurance");
+            jeuFini = true;
+            System.out.println("Perdu");
+        }
+
+        if(joueurJeu.getJoueurCaseOccupee().getPosX() == grilleJeu.getTailleGrille() -1 && joueurJeu.getJoueurCaseOccupee().getPosY() == grilleJeu.getTailleGrille() -1)
+        {
+            jeuFini = true;
+            System.out.println("Gagné");
         }
         System.out.println("Endurance : " + joueurJeu.getJoueurEndurance());
         this.ShowGrille();

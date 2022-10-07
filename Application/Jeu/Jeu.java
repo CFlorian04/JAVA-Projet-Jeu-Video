@@ -79,13 +79,13 @@ public class Jeu {
             
             if ((joueurCoordX + changeX >= 0 && joueurCoordX + changeX < tailleGrille) && (joueurCoordY + changeY >= 0 && joueurCoordY + changeY < tailleGrille)) {
 
+                Case futur = grilleJeu.getCase(joueurCoordX + changeX, joueurCoordY + changeY);
         
-                if (!(grilleJeu.getCase(joueurCoordX + changeX, joueurCoordY + changeY).getCategorie() instanceof Obstacle)) {
+                if (!(futur.getCategorie() instanceof Obstacle)) {
                     joueurJeu.Déplacer(joueurCoordX + changeX, joueurCoordY + changeY);
-                    if ((grilleJeu.getCase(joueurCoordX + changeX, joueurCoordY + changeY).getCategorie() instanceof Bonus)) {
+                    if ((futur.getCategorie() instanceof Bonus)) {
                         joueurJeu.modifEndurance(10);
-                        grilleJeu.setCase(new Case(joueurCoordX, joueurCoordY));
-                        grilleJeu.getCase(joueurCoordX, joueurCoordY).setCategorie(null);
+                        futur.setCategorie(null);
                     }
                 } else {
                     joueurJeu.modifEndurance(-10);

@@ -1,149 +1,98 @@
 package Jeu;
 
-import CasesClasses.*;
+import javafx.scene.Scene;
+import Grille.Grille;
 import Joueur.Joueur;
+import Case.Bonus;
+import Case.Case;
+import Case.Obstacle;
 
 public class Jeu {
 
-    final int DROITE = 0;
-    final int BAS = 1;
-    final int GAUCHE = 2;
-    final int HAUT = 3;
+    int tailleGrille = 10;
+    int enduranceJoueur = 25;
+    Scene sceneJeu;
+    Grille grilleJeu;
+    Case caseJoueurJeu;
+    Joueur joueurJeu;
 
-    int tailleGrille = 0;
-    
-    Joueur player;
-    int[][] consoleGrille;
-    Case[][] Casegrille = new Case[tailleGrille][tailleGrille]; 
-
-    Obstacle obstacle = new Obstacle(0);
-	Bonus bonus = new Bonus(0);
-
-    public Jeu() {
-        initialiseCasegrille();
-        player = new Joueur(15, Casegrille[0][0]);
-    }
-
-    public Jeu(int[][] consoleGrille) {
-
-        this.consoleGrille = consoleGrille;
-        initialiseCasegrille();
-        player = new Joueur(15, Casegrille[0][0]);
-
+    public Jeu(Scene scene) {
+        this.sceneJeu = scene;
+        this.caseJoueurJeu = new Case(0, 0);
+        this.joueurJeu = new Joueur(enduranceJoueur, caseJoueurJeu);
+        this.grilleJeu = new Grille(tailleGrille);
 
     }
 
-    public int getTailleGrille()
-    {
+    public int getTailleGrille() {
         return tailleGrille;
     }
 
-    public Case getCase(int x, int y)
-    {	
-         if(x < Casegrille.length && y < Casegrille[x].length) 	{return Casegrille[x][y];}
- 
-         return null;
+    public char[][] getJeuChar() {
+        char[][] grilleFinal = grilleJeu.toChar();
+        grilleFinal[joueurJeu.getJoueurCaseOccupee().getPosX()][joueurJeu.getJoueurCaseOccupee().getPosY()] = 'A';
+        grilleFinal[tailleGrille - 1][tailleGrille - 1] = 'M';
+
+        return grilleFinal;
     }
-    
-   public void initialiseCasegrille()
-   {
-		for(int i = 0; i< tailleGrille; i++)
-		{
-			for(int y = 0; y< tailleGrille; y++)
-			{
-				Casegrille[i][y] = new Case(i,y);
 
+    public void ShowGrille() {
 
-                //'0' -> Vide / '1' -> Obstacle / '2' -> Bonus / '3' -> Joueur / '4' -> Maison
-                switch(consoleGrille[i][y])
-                {
-                    case 0 :    break;
-                    case 1 :    Casegrille[i][y].setCategorie(obstacle);
-                                break;
-                    case 2 :    Casegrille[i][y].setCategorie(bonus);
-                                break;
-                    case 3 :    break;
-                    case 4 :    break;
-                    default :   break;
-                }
-			}
-		}
-   }
+        char[][] jeuCharGrille = this.getJeuChar();
 
-   public void setUpdateGrille(int[][] consoleGrille)
-   {
-        this.consoleGrille = consoleGrille;
-   }
+        for (int x = 0; x < this.getTailleGrille(); x++) {
 
+            for (int y = 0; y < this.getTailleGrille(); y++) {
 
-   /**
-    * Test si un chemin est possible vers l'arrivée
-    * @param current case courante
-    * @param arrivé case objectif
-    * @param Grille grille du jeu
-    * @return vrai si chemin possible
-    */
-   public boolean canGo(Case current, Case arrivé, int[][] Grille) {
-        Case[] voisins;
-
-        if(current.getCategorie() instanceof Obstacle){//si la case est un obstacle, retourner faux
-            return false;
-        }else if(current.voisin(arrivé)){//sinon si la case est à côté de l'arrivé retourner vrai
-            return true;
-        }else {
-            voisins = getVoisins(current);//obtention des voisins de la case
-
-            if((current = voisins[DROITE]) != null){//si case à droite éxiste
-
-                if (canGo(current, arrivé, Grille)) return true; // retourner vrai si chemin trouvé
-                
-            }if((current = voisins[GAUCHE]) != null){
-
-                if (canGo(current, arrivé, Grille)) return true;
-
-            }if((current = voisins[HAUT]) != null){
-                
-                if (canGo(current, arrivé, Grille)) return true;
-                
-            }if((current = voisins[BAS]) != null){
-
-                if (canGo(current, arrivé, Grille)) return true;
-                
+                System.out.print(jeuCharGrille[y][x]);
             }
+            System.out.println(" ");
         }
-        return false;
-   }
-
-   public Case[] getVoisins (Case c) {
-        Case[] voisins = new Case[4];
-        int x = c.getPosX();
-        int y = c.getPosY();
-
-        voisins [DROITE] = this.getCase(x +1, y);
-        voisins [GAUCHE] = this.getCase(x -1, y);
-        voisins [HAUT] = this.getCase(x, y +1);
-        voisins [BAS] = this.getCase(x, y -1);
-
-        return voisins;
     }
 
-   public int changerPosJoueur(int x, int y)
-   {
-        int endurance = 0;
+    public void moveJoueurJeu(char key) {
+        int joueurCoordX = joueurJeu.getJoueurCaseOccupee().getPosX();
+        int joueurCoordY = joueurJeu.getJoueurCaseOccupee().getPosY();
+        if (joueurJeu.getJoueurEndurance() > 0) {
 
-        if(x != 0)
-        {
-            endurance = player.Marche(x,y);
+            int changeX = 0;
+            int changeY = 0;
+            switch (key) {
+                case 'g':
+                    changeX = -1;
+                    break;
+                case 'd':
+                    changeX = 1;
+                    break;
+                case 'h':
+                    changeY = -1;
+                    break;
+                case 'b':
+                    changeY = 1;
+                    break;
+            }
+
+            if (!(grilleJeu.getCase(joueurCoordX + changeX, joueurCoordY + changeY).getCategorie() instanceof Obstacle)) {
+                joueurJeu.Déplacer(joueurCoordX + changeX, joueurCoordY + changeY);
+                if ((grilleJeu.getCase(joueurCoordX + changeX, joueurCoordY + changeY).getCategorie() instanceof Bonus))
+                {
+                    joueurJeu.modifEndurance(10);
+                    grilleJeu.setCase(new Case(joueurCoordX, joueurCoordY));
+                    grilleJeu.getCase(joueurCoordX, joueurCoordY).setCategorie(null);
+                }
+            }
+            else
+            {
+                joueurJeu.modifEndurance(-10);
+            }
+
+            // System.out.println( joueurJeu.getJoueurCaseOccupee().getPosX() + " / " +
+            // joueurJeu.getJoueurCaseOccupee().getPosY());
+        } else {
+            System.out.println("Plus endurance");
         }
-            
-        return endurance;
-   }
+        System.out.println("Endurance : " + joueurJeu.getJoueurEndurance());
+        this.ShowGrille();
 
-   public void testChange(int x, int y)
-   {
-        if(x != 0)
-        {
-            player.Deplacer(x,y);
-        }   
-   }
+    }
 }

@@ -1,4 +1,4 @@
-package CasesClasses;
+package Case;
 
 
 public class Case implements Comparable{
